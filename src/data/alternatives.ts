@@ -24,12 +24,12 @@ export const alternatives: Alternative[] = [
       "Solid stealth mode that handles most bot detection",
     ],
     cons: [
-      "No self-hosting option — cloud-only, which means vendor lock-in",
+      "No self-hosting option. Cloud-only, which means vendor lock-in",
       "Higher per-session pricing with no free tier for experimentation",
-      "No built-in CAPTCHA solving — requires external integration",
+      "No built-in CAPTCHA solving, requires external integration",
       "Limited proxy configuration compared to BrowseFleet's per-session proxy support",
       "No Computer API equivalent for vision-based AI agent workflows",
-      "Closed-source — you cannot audit the code or contribute fixes",
+      "Closed-source, so you cannot audit the code or contribute fixes",
       "No cookie/profile persistence across sessions without workarounds",
     ],
     pricingComparison: "Steel charges based on session-minutes with plans starting around $49/month. BrowseFleet offers a free Hobby tier with 500 daily requests, and paid plans start at $29/month with per-hour billing. For teams running 100+ concurrent sessions, BrowseFleet's Pro plan at $0.05/hr is significantly cheaper. Self-hosting BrowseFleet eliminates cloud costs entirely.",
@@ -46,7 +46,7 @@ export const alternatives: Alternative[] = [
       "Self-Hosting": { browsefleet: "Single Docker container, fully open-source", competitor: "Cloud-only" },
       "Pricing": { browsefleet: "Free tier, $29-$499/mo, self-host free", competitor: "From ~$49/mo, no free tier" },
     },
-    verdict: "Steel is a solid product with a good developer experience, and it deserves credit for pushing the cloud browser API space forward. However, BrowseFleet offers more out of the box — built-in CAPTCHA solving, a Computer API for vision-based agents, cookie persistence, and the ability to self-host. If you want a fully open-source solution you can run on your own infrastructure, or if you need features like CAPTCHA solving without bolting on external services, BrowseFleet is the stronger choice. If you are already invested in Steel's ecosystem and do not need self-hosting or CAPTCHA solving, Steel remains a reasonable option.",
+    verdict: "Steel is a solid product with a good developer experience, and it deserves credit for pushing the cloud browser API space forward. However, BrowseFleet offers more out of the box: built-in CAPTCHA solving, a Computer API for vision-based agents, cookie persistence, and the ability to self-host. If you want a fully open-source solution you can run on your own infrastructure, or if you need features like CAPTCHA solving without bolting on external services, BrowseFleet is the stronger choice. If you are already invested in Steel's ecosystem and do not need self-hosting or CAPTCHA solving, Steel remains a reasonable option.",
   },
   {
     slug: "browserbase",
@@ -129,7 +129,7 @@ export const alternatives: Alternative[] = [
       "Strong community and active development",
     ],
     cons: [
-      "Complexity — it is a full platform, not just a browser API",
+      "Complex: it is a full platform, not just a browser API",
       "Vendor lock-in with proprietary Actor format",
       "Expensive at scale due to platform fees on top of compute",
       "Not designed for AI agent workflows",
@@ -158,15 +158,15 @@ export const alternatives: Alternative[] = [
     description: "ScrapingBee is a web scraping API that handles proxies, headless browsers, and JavaScript rendering. It focuses on making scraping simple with a REST API.",
     tagline: "Simple REST API for web scraping",
     pros: [
-      "Very simple REST API — no browser management needed",
+      "Very simple REST API with no browser management needed",
       "Built-in proxy rotation with residential proxies",
       "Good for simple scraping tasks",
       "Handles JavaScript rendering automatically",
     ],
     cons: [
-      "REST-only — no WebSocket CDP access for interactive automation",
+      "REST-only with no WebSocket CDP access for interactive automation",
       "No AI agent support or Computer API",
-      "No session persistence — each request is stateless",
+      "No session persistence since each request is stateless",
       "Cannot control the browser interactively",
       "No self-hosting option",
     ],
@@ -199,7 +199,7 @@ export const alternatives: Alternative[] = [
       "Strong compliance and legal framework",
     ],
     cons: [
-      "Enterprise pricing — expensive for small teams and startups",
+      "Enterprise pricing that is expensive for small teams and startups",
       "Complex product lineup that can be confusing",
       "No AI agent features or Computer API",
       "Overkill for developers who just need cloud browsers",
@@ -233,7 +233,7 @@ export const alternatives: Alternative[] = [
       "Built-in scheduling and data export",
     ],
     cons: [
-      "No raw browser access — limited to pre-built Phantoms",
+      "No raw browser access, limited to pre-built Phantoms",
       "Cannot build custom automations",
       "No AI agent support",
       "High per-automation pricing",
@@ -254,7 +254,7 @@ export const alternatives: Alternative[] = [
       "Self-Hosting": { browsefleet: "Docker, open-source", competitor: "Cloud-only" },
       "Pricing": { browsefleet: "Usage-based, from $29/mo", competitor: "Slot-based, from $69/mo" },
     },
-    verdict: "PhantomBuster is designed for marketers and sales teams who want pre-built social media automations without writing code. If that describes you, it may be worth considering. But it is not a developer tool — you cannot build custom automations, access browsers directly, or integrate AI agents. For developers, BrowseFleet is the right choice because it gives you full browser control and the flexibility to build anything.",
+    verdict: "PhantomBuster is designed for marketers and sales teams who want pre-built social media automations without writing code. If that describes you, it may be worth considering. But it is not a developer tool. You cannot build custom automations, access browsers directly, or integrate AI agents. For developers, BrowseFleet is the right choice because it gives you full browser control and the flexibility to build anything.",
   },
   {
     slug: "zenrows",
@@ -268,7 +268,7 @@ export const alternatives: Alternative[] = [
       "Handles JavaScript rendering",
     ],
     cons: [
-      "REST-only — no interactive browser sessions",
+      "REST-only with no interactive browser sessions",
       "No AI agent support or Computer API",
       "No session persistence",
       "Cannot control the browser interactively",

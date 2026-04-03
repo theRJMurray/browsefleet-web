@@ -11,7 +11,7 @@ export const integrations: Integration[] = [
   {
     slug: "puppeteer",
     name: "Puppeteer",
-    description: "Puppeteer is Google's official Node.js library for controlling Chrome and Chromium. BrowseFleet provides a CDP WebSocket endpoint that Puppeteer can connect to directly, letting you move from local to cloud browsers with a single line change. All Puppeteer APIs work as expected — page navigation, DOM manipulation, screenshots, PDF generation, and network interception.",
+    description: "Puppeteer is Google's official Node.js library for controlling Chrome and Chromium. BrowseFleet provides a CDP WebSocket endpoint that Puppeteer can connect to directly, letting you move from local to cloud browsers with a single line change. All Puppeteer APIs work as expected: page navigation, DOM manipulation, screenshots, PDF generation, and network interception.",
     installation: `npm install puppeteer-core browsefleet`,
     codeExample: `import { BrowseFleet } from 'browsefleet';
 import puppeteer from 'puppeteer-core';
@@ -24,7 +24,7 @@ const session = await bf.sessions.create({
   viewport: { width: 1920, height: 1080 },
 });
 
-// Connect Puppeteer — the only line that changes
+// Connect Puppeteer - the only line that changes
 const browser = await puppeteer.connect({
   browserWSEndpoint: session.websocketUrl,
 });
@@ -67,7 +67,7 @@ await session.close();`,
   {
     slug: "playwright",
     name: "Playwright",
-    description: "Playwright is Microsoft's cross-browser automation library supporting Chromium, Firefox, and WebKit. BrowseFleet provides a CDP endpoint that Playwright's Chromium driver can connect to using connectOverCDP. Your existing Playwright test suites and automation scripts work without modification — just change the connection URL.",
+    description: "Playwright is Microsoft's cross-browser automation library supporting Chromium, Firefox, and WebKit. BrowseFleet provides a CDP endpoint that Playwright's Chromium driver can connect to using connectOverCDP. Your existing Playwright test suites and automation scripts work without modification. Just change the connection URL.",
     installation: `npm install playwright browsefleet`,
     codeExample: `import { BrowseFleet } from 'browsefleet';
 import { chromium } from 'playwright';
@@ -121,7 +121,7 @@ await session.close();`,
   {
     slug: "selenium",
     name: "Selenium",
-    description: "Selenium WebDriver is the most widely-used browser automation framework. BrowseFleet provides a Selenium-compatible endpoint that works with existing WebDriver configurations. Teams with large Selenium test suites can migrate to cloud browsers without rewriting tests — just update the remote WebDriver URL.",
+    description: "Selenium WebDriver is the most widely-used browser automation framework. BrowseFleet provides a Selenium-compatible endpoint that works with existing WebDriver configurations. Teams with large Selenium test suites can migrate to cloud browsers without rewriting tests. Just update the remote WebDriver URL.",
     installation: `pip install selenium browsefleet-python
 # or
 npm install selenium-webdriver browsefleet`,
@@ -286,7 +286,7 @@ session.close()`,
   {
     slug: "claude-computer-use",
     name: "Claude Computer Use",
-    description: "Claude Computer Use is Anthropic's API for letting Claude interact with computer interfaces through screenshots and actions. BrowseFleet's Computer API is purpose-built for this workflow — every action returns a screenshot that feeds directly into Claude's vision model for the next decision.",
+    description: "Claude Computer Use is Anthropic's API for letting Claude interact with computer interfaces through screenshots and actions. BrowseFleet's Computer API is purpose-built for this workflow. Every action returns a screenshot that feeds directly into Claude's vision model for the next decision.",
     installation: `npm install @anthropic-ai/sdk browsefleet`,
     codeExample: `import Anthropic from '@anthropic-ai/sdk';
 import { BrowseFleet } from 'browsefleet';

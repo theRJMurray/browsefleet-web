@@ -1,5 +1,6 @@
 import { useCases } from "@/data/use-cases";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
   return useCases.map((uc) => ({ slug: uc.slug }));
@@ -30,7 +31,7 @@ export default async function UseCasePage({
 }) {
   const { slug } = await params;
   const uc = useCases.find((u) => u.slug === slug);
-  if (!uc) return <div>Not found</div>;
+  if (!uc) notFound();
 
   return (
     <div>

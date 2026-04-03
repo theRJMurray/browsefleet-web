@@ -1,5 +1,6 @@
 import { integrations } from "@/data/integrations";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
   return integrations.map((int) => ({ slug: int.slug }));
@@ -30,7 +31,7 @@ export default async function IntegrationPage({
 }) {
   const { slug } = await params;
   const int = integrations.find((i) => i.slug === slug);
-  if (!int) return <div>Not found</div>;
+  if (!int) notFound();
 
   return (
     <div>

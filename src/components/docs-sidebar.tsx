@@ -47,7 +47,7 @@ export function DocsSidebar() {
   const pathname = usePathname();
 
   return (
-    <nav className="w-56 shrink-0 sticky top-20 self-start max-h-[calc(100vh-6rem)] overflow-y-auto pr-4">
+    <nav aria-label="Documentation sidebar" className="w-56 shrink-0 sticky top-20 self-start max-h-[calc(100vh-6rem)] overflow-y-auto pr-4">
       {NAV_SECTIONS.map((section) => (
         <div key={section.title} className="mb-6">
           <p className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-2">

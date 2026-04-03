@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
+import { MobileNav } from "@/components/mobile-nav";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://browsefleet.com"),
   title: "BrowseFleet — Cloud Browser API for AI Agents",
   description:
     "Open-source headless browser API. Launch cloud browsers, scrape content, and automate the web. Built for AI agents and developers.",
@@ -16,6 +18,11 @@ export const metadata: Metadata = {
     siteName: "BrowseFleet",
     type: "website",
     url: "https://browsefleet.com",
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og.png"],
   },
 };
 
@@ -58,12 +65,12 @@ const jsonLd = {
 
 function Nav() {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-xl">
+    <nav aria-label="Main navigation" className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-xl">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="text-lg font-bold tracking-tight text-white">
           BrowseFleet
         </Link>
-        <div className="flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-8">
           <Link
             href="/docs"
             className="text-sm text-zinc-400 hover:text-white transition-colors"
@@ -95,6 +102,7 @@ function Nav() {
             Dashboard
           </Link>
         </div>
+        <MobileNav />
       </div>
     </nav>
   );
@@ -102,7 +110,7 @@ function Nav() {
 
 function Footer() {
   return (
-    <footer className="border-t border-zinc-800/50 mt-auto">
+    <footer aria-label="Footer" className="border-t border-zinc-800/50 mt-auto">
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10">
           {/* Product */}

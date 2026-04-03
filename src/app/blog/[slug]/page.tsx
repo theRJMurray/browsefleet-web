@@ -1,5 +1,6 @@
 import { blogPosts } from "@/data/blog-posts";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
@@ -61,6 +62,17 @@ function renderContent(content: string) {
       continue;
     }
 
+    if (line.startsWith("### ")) {
+      if (currentBlock.length > 0) {
+        elements.push({ type: "text", content: currentBlock.join("\n") });
+        currentBlock = [];
+      }
+      const heading = line.replace("### ", "");
+      const id = heading.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+      elements.push({ type: "h3", content: heading, id });
+      continue;
+    }
+
     if (line.startsWith("## ")) {
       if (currentBlock.length > 0) {
         elements.push({ type: "text", content: currentBlock.join("\n") });
@@ -104,6 +116,18 @@ function renderContent(content: string) {
         >
           {el.content}
         </h2>
+      );
+    }
+
+    if (el.type === "h3") {
+      return (
+        <h3
+          key={i}
+          id={el.id}
+          className="text-xl font-bold text-white mt-8 mb-3"
+        >
+          {el.content}
+        </h3>
       );
     }
 
@@ -168,16 +192,42 @@ function renderContent(content: string) {
         );
       }
 
-      // Inline formatting
-      const formatted = trimmed
-        .replace(
-          /\*\*(.*?)\*\*/g,
-          '<strong class="text-white font-semibold">$1</strong>'
-        )
-        .replace(
-          /`([^`]+)`/g,
-          '<code class="text-purple-300 text-[13px] bg-zinc-800/50 px-1.5 py-0.5 rounded">$1</code>'
+      // Inline formatting helper
+      function applyInlineFormatting(text: string) {
+        return text
+          .replace(
+            /\*\*(.*?)\*\*/g,
+            '<strong class="text-white font-semibold">$1</strong>'
+          )
+          .replace(
+            /`([^`]+)`/g,
+            '<code class="text-purple-300 text-[13px] bg-zinc-800/50 px-1.5 py-0.5 rounded">$1</code>'
+          )
+          .replace(
+            /\[([^\]]+)\]\(([^)]+)\)/g,
+            '<a href="$2" class="text-purple-400 hover:text-purple-300 underline underline-offset-2">$1</a>'
+          );
+      }
+
+      const formatted = applyInlineFormatting(trimmed);
+
+      // Numbered list
+      if (/^\d+\.\s/.test(trimmed)) {
+        const items = trimmed.split("\n").filter((l) => /^\d+\.\s/.test(l));
+        return (
+          <ol key={`${i}-${j}`} className="space-y-2 my-4 list-decimal list-inside">
+            {items.map((item, ii) => (
+              <li
+                key={ii}
+                className="text-sm text-zinc-400 leading-relaxed"
+                dangerouslySetInnerHTML={{
+                  __html: applyInlineFormatting(item.replace(/^\d+\.\s/, "")),
+                }}
+              />
+            ))}
+          </ol>
         );
+      }
 
       if (trimmed.startsWith("- ")) {
         const items = trimmed.split("\n").filter((l) => l.startsWith("- "));
@@ -189,16 +239,7 @@ function renderContent(content: string) {
                 <span
                   className="text-sm text-zinc-400 leading-relaxed"
                   dangerouslySetInnerHTML={{
-                    __html: item
-                      .replace(/^- /, "")
-                      .replace(
-                        /\*\*(.*?)\*\*/g,
-                        '<strong class="text-white font-semibold">$1</strong>'
-                      )
-                      .replace(
-                        /`([^`]+)`/g,
-                        '<code class="text-purple-300 text-[13px]">$1</code>'
-                      ),
+                    __html: applyInlineFormatting(item.replace(/^- /, "")),
                   }}
                 />
               </li>
@@ -225,10 +266,25 @@ export default async function BlogPostPage({
 }) {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
-  if (!post) return <div>Not found</div>;
+  if (!post) notFound();
 
   return (
     <div>
+      {/* Article JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: post.title,
+            datePublished: post.publishedAt,
+            author: { "@type": "Organization", name: "BrowseFleet" },
+            publisher: { "@type": "Organization", name: "BrowseFleet" },
+          }),
+        }}
+      />
+
       {/* Header */}
       <section className="border-b border-zinc-800/50">
         <div className="max-w-3xl mx-auto px-6 pt-24 pb-16">

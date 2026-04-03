@@ -1,5 +1,6 @@
 import { alternatives } from "@/data/alternatives";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
   return alternatives.map((alt) => ({ slug: alt.slug }));
@@ -48,7 +49,7 @@ export default async function AlternativePage({
 }) {
   const { slug } = await params;
   const alt = alternatives.find((a) => a.slug === slug);
-  if (!alt) return <div>Not found</div>;
+  if (!alt) notFound();
 
   const featureEntries = Object.entries(alt.features);
 

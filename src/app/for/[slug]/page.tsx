@@ -1,5 +1,6 @@
 import { audiences } from "@/data/audiences";
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
   return audiences.map((aud) => ({ slug: aud.slug }));
@@ -30,7 +31,7 @@ export default async function AudiencePage({
 }) {
   const { slug } = await params;
   const aud = audiences.find((a) => a.slug === slug);
-  if (!aud) return <div>Not found</div>;
+  if (!aud) notFound();
 
   return (
     <div>

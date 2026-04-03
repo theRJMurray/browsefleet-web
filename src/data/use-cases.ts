@@ -14,14 +14,14 @@ export const useCases: UseCase[] = [
     slug: "web-scraping",
     title: "Web Scraping",
     description: "Extract structured data from any website at scale using cloud browsers with built-in stealth and proxy rotation.",
-    problem: "Modern websites use JavaScript rendering, anti-bot detection, and CAPTCHAs to prevent scraping. Running headless browsers locally does not scale — each instance consumes 200-500MB of RAM, crashes under load, and gets blocked by fingerprint detection. Managing proxies, retries, and browser lifecycle adds weeks of engineering work.",
+    problem: "Modern websites use JavaScript rendering, anti-bot detection, and CAPTCHAs to prevent scraping. Running headless browsers locally does not scale. Each instance consumes 200-500MB of RAM, crashes under load, and gets blocked by fingerprint detection. Managing proxies, retries, and browser lifecycle adds weeks of engineering work.",
     solution: "BrowseFleet handles the hard parts of scraping. Launch cloud browser sessions with stealth mode enabled by default, connect your existing Puppeteer or Playwright code with a one-line change, and let BrowseFleet manage browser lifecycle, proxy rotation, and CAPTCHA solving. For simple pages, use the quick-action scrape endpoint that returns cleaned HTML, Markdown, and readability-optimized text in a single API call.",
     featuresUsed: ["Sessions API", "Stealth Mode", "Quick Actions", "CAPTCHA Solving", "Proxy Support"],
     codeExample: `import { BrowseFleet } from 'browsefleet';
 
 const bf = new BrowseFleet({ apiKey: 'bf_...' });
 
-// Quick scrape — one call, no session needed
+// Quick scrape - one call, no session needed
 const { markdown, html, text } = await bf.scrape(
   'https://example.com/products',
   { stealth: 'full' }
@@ -61,8 +61,8 @@ await session.close();`,
     slug: "ai-agents",
     title: "AI Web Agents",
     description: "Build AI agents that can browse, interact with, and extract information from the web using vision-based automation.",
-    problem: "AI agents need to interact with real websites — clicking buttons, filling forms, reading content, and navigating multi-step workflows. Local browsers crash, get detected as bots, and cannot handle the concurrency needed for production agent deployments. Existing tools were not designed for the screenshot-to-action loop that vision-based agents require.",
-    solution: "BrowseFleet's Computer API was built specifically for AI agents. Every action — click, type, scroll — returns a screenshot that you can pass directly to Claude, GPT-4o, or Gemini for the next decision. Sessions start in under a second, stealth mode prevents detection, and the Agent API provides a higher-level interface for common agent patterns.",
+    problem: "AI agents need to interact with real websites: clicking buttons, filling forms, reading content, and navigating multi-step workflows. Local browsers crash, get detected as bots, and cannot handle the concurrency needed for production agent deployments. Existing tools were not designed for the screenshot-to-action loop that vision-based agents require.",
+    solution: "BrowseFleet's Computer API was built specifically for AI agents. Every action (click, type, scroll) returns a screenshot that you can pass directly to Claude, GPT-4o, or Gemini for the next decision. Sessions start in under a second, stealth mode prevents detection, and the Agent API provides a higher-level interface for common agent patterns.",
     featuresUsed: ["Computer API", "Agent API", "Sessions API", "Stealth Mode", "Cookie Persistence"],
     codeExample: `import { BrowseFleet } from 'browsefleet';
 import Anthropic from '@anthropic-ai/sdk';
