@@ -29,7 +29,7 @@ export const blogPosts: BlogPost[] = [
       "Production Deployment",
       "Best Practices",
     ],
-    content: `AI web agents are autonomous programs that can browse, interact with, and extract information from websites using the same visual interface that humans use. Instead of parsing HTML or calling APIs, these agents look at screenshots and decide what to click, type, or scroll — just like a person sitting at a computer.
+    content: `AI web agents are autonomous programs that can browse, interact with, and extract information from websites using the same visual interface that humans use. Instead of parsing HTML or calling APIs, these agents look at screenshots and decide what to click, type, or scroll, just like a person sitting at a computer.
 
 In 2026, this is no longer a research project. Vision-capable language models from Anthropic, OpenAI, and Google can reliably interpret web interfaces and make decisions about how to interact with them. The missing piece has been reliable browser infrastructure. Running headless browsers locally is fragile, gets detected by anti-bot systems, and does not scale. Cloud browser APIs solve this.
 
@@ -37,7 +37,7 @@ In 2026, this is no longer a research project. Vision-capable language models fr
 
 An AI web agent is a program that combines three components: a browser (for rendering and interacting with web pages), a vision-capable language model (for understanding what is on the screen and deciding what to do), and an orchestration layer (for managing the loop between the two).
 
-The agent receives a task — "find the cheapest flight from NYC to London on March 20" — and then browses the web autonomously to complete it. It navigates to travel sites, fills in search forms, reads results, compares prices, and reports back.
+The agent receives a task like "find the cheapest flight from NYC to London on March 20" and then browses the web autonomously to complete it. It navigates to travel sites, fills in search forms, reads results, compares prices, and reports back.
 
 What makes this possible in 2026 is the convergence of three technologies: models like Claude Sonnet and GPT-4o that can accurately interpret screenshots, APIs like Anthropic's Computer Use that formalize the interaction protocol, and cloud browser services like BrowseFleet that provide scalable, stealth browser infrastructure.
 
@@ -52,7 +52,7 @@ The core architecture of every AI web agent is the screenshot-action loop:
 5. Take a new screenshot
 6. Repeat until the task is complete
 
-This loop is simple in concept but has important nuances in practice. The screenshot must capture enough context for the model to make good decisions. Actions need error handling — what if a click lands on the wrong element? And the loop needs a termination condition so the agent does not run forever.
+This loop is simple in concept but has important nuances in practice. The screenshot must capture enough context for the model to make good decisions. Actions need error handling. What if a click lands on the wrong element? And the loop needs a termination condition so the agent does not run forever.
 
 Here is the basic loop implemented with BrowseFleet and Claude:
 
@@ -104,9 +104,9 @@ There are three common patterns for structuring AI web agents:
 
 **Single-model loop.** One model handles both perception (understanding the screenshot) and decision-making (choosing the next action). This is the simplest pattern and works well for straightforward tasks. The code example above uses this pattern.
 
-**Planner-executor split.** A planning model breaks the task into steps, and an execution model handles each step. The planner might use a larger model like Claude Opus or GPT-4 for strategic decisions, while the executor uses a faster model like Claude Sonnet or GPT-4o-mini for individual actions. This pattern is more robust for complex, multi-step tasks.
+**Planner-executor split.** A planning model breaks the task into steps, and an execution model handles each step. The planner might use a larger model like Claude Opus or GPT-4 for strategic decisions, while the executor uses a faster model like Claude Sonnet or GPT-4o-mini for individual actions. This pattern is more reliable for complex, multi-step tasks.
 
-**Multi-agent collaboration.** Multiple agents work on different aspects of a task simultaneously. For example, one agent researches pricing on a competitor's site while another checks product availability on a supplier's site. BrowseFleet's concurrent sessions make this practical — each agent gets its own isolated browser session.
+**Multi-agent collaboration.** Multiple agents work on different aspects of a task simultaneously. For example, one agent researches pricing on a competitor's site while another checks product availability on a supplier's site. BrowseFleet's concurrent sessions make this practical since each agent gets its own isolated browser session.
 
 The right pattern depends on your use case. Start with the single-model loop and graduate to more complex patterns only when you need them.
 
@@ -185,11 +185,11 @@ This example demonstrates the key patterns: using BrowseFleet's Computer API for
 
 Both Claude and GPT-4o are capable of driving web agents, but they have different strengths.
 
-**Claude (Sonnet and Opus)** excels at understanding complex layouts, following multi-step instructions, and providing structured output. Anthropic's Computer Use API formalizes the agent interaction protocol, making Claude the most natural fit for web agents. Claude is also better at spatial reasoning — accurately identifying where to click on a page.
+**Claude (Sonnet and Opus)** excels at understanding complex layouts, following multi-step instructions, and providing structured output. Anthropic's Computer Use API formalizes the agent interaction protocol, making Claude the most natural fit for web agents. Claude is also better at spatial reasoning, accurately identifying where to click on a page.
 
 **GPT-4o** has strong vision capabilities and is fast. It works well for simple, repetitive tasks where speed matters more than nuanced understanding. GPT-4o-mini is significantly cheaper and can handle straightforward interactions at lower cost.
 
-In practice, many production agents use Claude for complex tasks and GPT-4o-mini for simple, high-volume tasks. BrowseFleet's Computer API works with both — it returns standard base64 screenshots that any vision model can process.
+In practice, many production agents use Claude for complex tasks and GPT-4o-mini for simple, high-volume tasks. BrowseFleet's Computer API works with both. It returns standard base64 screenshots that any vision model can process.
 
 ## Handling Failures and Edge Cases
 
@@ -197,7 +197,7 @@ Real-world web agents encounter many failure modes. Here are the most common and
 
 **Page load failures.** Websites time out, return errors, or redirect unexpectedly. Always set a timeout on page loads and implement retry logic with exponential backoff.
 
-**Model misinterpretation.** The vision model sometimes clicks the wrong element or misreads text. Implement validation steps — after an action, check that the page state changed as expected. If not, try an alternative action.
+**Model misinterpretation.** The vision model sometimes clicks the wrong element or misreads text. Implement validation steps. After an action, check that the page state changed as expected. If not, try an alternative action.
 
 **CAPTCHAs.** Many websites present CAPTCHAs to automated browsers. BrowseFleet's built-in CAPTCHA solving handles reCAPTCHA, hCaptcha, and Turnstile automatically. Enable it with the captchaSolving option.
 
@@ -213,7 +213,7 @@ Moving from a prototype to a production agent deployment requires attention to s
 
 **Cost management.** Vision model API calls are expensive. Optimize by using the smallest model that works for each subtask, reducing screenshot resolution where detail is not needed, and caching results for repeated queries.
 
-**Monitoring.** Log every step of the agent loop — screenshots, model responses, and actions taken. This is essential for debugging when agents fail and for improving agent performance over time.
+**Monitoring.** Log every step of the agent loop: screenshots, model responses, and actions taken. This is essential for debugging when agents fail and for improving agent performance over time.
 
 **Error recovery.** Implement checkpoint-based recovery so agents can resume from the last successful step after a failure, rather than starting over.
 
@@ -236,7 +236,7 @@ After building dozens of AI web agents, these are the practices that make the bi
     title: "Steel vs BrowseFleet: An Honest Comparison",
     metaTitle: "Steel vs BrowseFleet: An Honest Comparison (2026) | BrowseFleet",
     metaDescription: "An honest, detailed comparison of Steel.dev and BrowseFleet. Features, pricing, self-hosting, and when to use each cloud browser API.",
-    excerpt: "A fair, detailed comparison of Steel and BrowseFleet — two cloud browser APIs built for AI agents. We acknowledge Steel's strengths and explain where BrowseFleet differs.",
+    excerpt: "A fair, detailed comparison of Steel and BrowseFleet, two cloud browser APIs built for AI agents. We acknowledge Steel's strengths and explain where BrowseFleet differs.",
     publishedAt: "2026-03-18",
     readingTime: 10,
     headings: [
@@ -249,19 +249,19 @@ After building dozens of AI web agents, these are the practices that make the bi
       "When to Use BrowseFleet",
       "Migration Guide",
     ],
-    content: `Steel and BrowseFleet are both cloud browser APIs designed for developers and AI agents. They solve the same core problem — running headless browsers in the cloud without managing infrastructure — but they take different approaches. This comparison is written by the BrowseFleet team, but we have made an effort to be fair and accurate. We will acknowledge where Steel does well.
+    content: `Steel and BrowseFleet are both cloud browser APIs designed for developers and AI agents. They solve the same core problem (running headless browsers in the cloud without managing infrastructure) but they take different approaches. This comparison is written by the BrowseFleet team, but we have made an effort to be fair and accurate. We will acknowledge where Steel does well.
 
 ## Background
 
 Steel.dev launched as a cloud browser API focused on developer experience and AI agent workflows. It has built a solid reputation for reliability and clean API design. The team ships frequently and has a growing community.
 
-BrowseFleet is open-source and self-hostable. It was built with the belief that browser infrastructure should not be a black box — developers should be able to audit the code, run it on their own servers, and customize it for their needs. BrowseFleet also includes features like built-in CAPTCHA solving and a Computer API that Steel does not offer.
+BrowseFleet is open-source and self-hostable. It was built with the belief that browser infrastructure should not be a black box. Developers should be able to audit the code, run it on their own servers, and customize it for their needs. BrowseFleet also includes features like built-in CAPTCHA solving and a Computer API that Steel does not offer.
 
 Both are good products. The right choice depends on your specific requirements.
 
 ## Core Architecture
 
-**Steel** is a managed cloud service. Your requests go to Steel's infrastructure, which provisions browser instances, manages their lifecycle, and returns results. This is the simpler operational model — you do not manage any infrastructure.
+**Steel** is a managed cloud service. Your requests go to Steel's infrastructure, which provisions browser instances, manages their lifecycle, and returns results. This is the simpler operational model. You do not manage any infrastructure.
 
 **BrowseFleet** offers both a managed cloud service and self-hosting via Docker. The managed service works the same way as Steel. Self-hosting gives you complete control over the infrastructure, data, and costs.
 
@@ -273,9 +273,9 @@ Both provide CDP WebSocket endpoints for connecting Puppeteer, Playwright, and o
 
 **Stealth mode.** Both offer stealth capabilities to bypass bot detection. Steel's stealth is reliable and handles most anti-bot systems. BrowseFleet's stealth includes fingerprint spoofing, WebDriver masking, and timezone matching. In our testing, both perform well against common bot detection services.
 
-**CAPTCHA solving.** BrowseFleet includes built-in CAPTCHA solving via 2captcha integration, supporting reCAPTCHA, hCaptcha, and Cloudflare Turnstile. Steel does not include built-in CAPTCHA solving — you need to integrate a third-party service yourself. This is a meaningful difference if your workflows regularly encounter CAPTCHAs.
+**CAPTCHA solving.** BrowseFleet includes built-in CAPTCHA solving via 2captcha integration, supporting reCAPTCHA, hCaptcha, and Cloudflare Turnstile. Steel does not include built-in CAPTCHA solving, so you need to integrate a third-party service yourself. This is a meaningful difference if your workflows regularly encounter CAPTCHAs.
 
-**Computer API.** BrowseFleet's Computer API provides click, type, scroll, and navigate actions that return screenshots after every action. This is purpose-built for the AI agent screenshot-action loop used by Claude Computer Use and similar systems. Steel does not have an equivalent — you would build this on top of their session API using Puppeteer.
+**Computer API.** BrowseFleet's Computer API provides click, type, scroll, and navigate actions that return screenshots after every action. This is purpose-built for the AI agent screenshot-action loop used by Claude Computer Use and similar systems. Steel does not have an equivalent, so you would build this on top of their session API using Puppeteer.
 
 **Quick actions.** BrowseFleet offers one-call endpoints for scraping (returns HTML, Markdown, text), screenshots, and PDF generation without creating a session. Steel focuses on session-based workflows; simple tasks still require creating and managing a session.
 
@@ -283,7 +283,7 @@ Both provide CDP WebSocket endpoints for connecting Puppeteer, Playwright, and o
 
 **Proxy support.** BrowseFleet supports per-session proxy URLs with SOCKS5 and HTTP authentication. Steel supports proxy configuration but with fewer options.
 
-**Self-hosting.** BrowseFleet is open-source and runs in a single Docker container with no external dependencies. Steel is cloud-only — there is no self-hosting option. For organizations with data residency requirements, compliance concerns, or a desire to control costs at scale, this is often the deciding factor.
+**Self-hosting.** BrowseFleet is open-source and runs in a single Docker container with no external dependencies. Steel is cloud-only with no self-hosting option. For organizations with data residency requirements, compliance concerns, or a desire to control costs at scale, this is often the deciding factor.
 
 ## Pricing Breakdown
 
@@ -296,13 +296,13 @@ BrowseFleet's pricing:
 - Pro ($499/mo): 100 concurrent sessions, unlimited requests
 - Self-hosted: Free, no limits
 
-For a team running 20 concurrent sessions with moderate usage, BrowseFleet's Developer plan at $99/month is comparable to or cheaper than Steel. At higher concurrency levels, the gap widens in BrowseFleet's favor. Self-hosting eliminates cloud costs entirely — you only pay for your server infrastructure.
+For a team running 20 concurrent sessions with moderate usage, BrowseFleet's Developer plan at $99/month is comparable to or cheaper than Steel. At higher concurrency levels, the gap widens in BrowseFleet's favor. Self-hosting eliminates cloud costs entirely. You only pay for your server infrastructure.
 
 ## Developer Experience
 
 This is where Steel deserves genuine credit. Their SDK is polished, the documentation is well-written, and the onboarding experience is smooth. If you are evaluating cloud browser APIs for the first time, Steel makes a strong first impression.
 
-BrowseFleet's developer experience is also good — the API is clean, the documentation covers every feature, and there are copy-paste code examples for common use cases. But we acknowledge that Steel has invested heavily in DX and it shows.
+BrowseFleet's developer experience is also good. The API is clean, the documentation covers every feature, and there are copy-paste code examples for common use cases. But we acknowledge that Steel has invested heavily in DX and it shows.
 
 Both provide TypeScript SDKs. Both have active communities where you can get help.
 
@@ -364,14 +364,14 @@ const browser = await puppeteer.connect({
 
 **Step 4: Take advantage of BrowseFleet features.** Once migrated, you can start using BrowseFleet-specific features like CAPTCHA solving, the Computer API, and cookie persistence.
 
-The migration typically takes 15-30 minutes for a simple project. The main effort is replacing the SDK import and session creation — everything else stays the same.`,
+The migration typically takes 15-30 minutes for a simple project. The main effort is replacing the SDK import and session creation. Everything else stays the same.`,
   },
   {
     slug: "web-scraping-at-scale-definitive-guide",
     title: "Web Scraping at Scale: The Definitive Guide",
     metaTitle: "Web Scraping at Scale: The Definitive Guide (2026) | BrowseFleet",
     metaDescription: "Learn to build scalable web scraping systems with cloud browsers. Architecture, anti-bot bypass, error handling, and production best practices.",
-    excerpt: "Everything you need to know about building reliable, large-scale web scraping systems — from architecture decisions to handling failures in production.",
+    excerpt: "Everything you need to know about building reliable, large-scale web scraping systems, from architecture decisions to handling failures in production.",
     publishedAt: "2026-03-20",
     readingTime: 12,
     headings: [
@@ -386,7 +386,7 @@ The migration typically takes 15-30 minutes for a simple project. The main effor
       "Monitoring Your Scraping Pipeline",
       "Cost Optimization",
     ],
-    content: `Web scraping at scale is one of the hardest problems in web engineering. A script that works for 10 pages breaks at 1,000. A system that handles 1,000 pages crumbles at 100,000. The challenges are not just technical — they are architectural, operational, and economic.
+    content: `Web scraping at scale is one of the hardest problems in web engineering. A script that works for 10 pages breaks at 1,000. A system that handles 1,000 pages crumbles at 100,000. The challenges are not just technical. They are architectural, operational, and economic.
 
 This guide covers everything you need to build a production scraping system that handles millions of pages reliably.
 
@@ -477,7 +477,7 @@ The rule of thumb: use quick actions for simple extraction, sessions for complex
 
 Anti-bot systems detect scrapers through several signals:
 
-**Browser fingerprinting.** Real browsers have consistent properties — navigator.webdriver is undefined, WebGL renders correctly, the User-Agent matches the actual browser version. Headless browsers have telltale inconsistencies. BrowseFleet's stealth mode patches all known fingerprint leaks.
+**Browser fingerprinting.** Real browsers have consistent properties: navigator.webdriver is undefined, WebGL renders correctly, the User-Agent matches the actual browser version. Headless browsers have telltale inconsistencies. BrowseFleet's stealth mode patches all known fingerprint leaks.
 
 **Behavioral analysis.** Real humans scroll, pause, move the mouse, and browse at varying speeds. Bots navigate instantly and interact at inhuman speeds. When using sessions for interactive scraping, add realistic delays and avoid perfectly consistent timing.
 
@@ -521,13 +521,13 @@ Every failure mode needs a specific response:
 
 **Timeout errors.** The page did not load within the time limit. Retry with a longer timeout, or flag the URL for investigation if it fails repeatedly.
 
-**HTTP errors (4xx, 5xx).** 403 usually means bot detection — retry with a different proxy and fresh session. 429 means rate limiting — back off and retry later. 5xx means the server is struggling — retry with exponential backoff.
+**HTTP errors (4xx, 5xx).** 403 usually means bot detection, so retry with a different proxy and fresh session. 429 means rate limiting, so back off and retry later. 5xx means the server is struggling, so retry with exponential backoff.
 
 **CAPTCHA failures.** CAPTCHA solving can fail. Retry with a fresh session. If CAPTCHAs persist, the site may require a higher-quality proxy.
 
 **Content validation failures.** The page loaded but the expected data is missing. This could mean the page structure changed, the content is behind a login wall, or the page is a soft block. Log the full HTML for investigation.
 
-Implement a retry budget — each URL gets 3-5 attempts before being moved to a dead letter queue for manual investigation.
+Implement a retry budget. Each URL gets 3-5 attempts before being moved to a dead letter queue for manual investigation.
 
 \`\`\`typescript
 async function scrapeWithRetry(url: string, maxRetries = 3) {
@@ -584,7 +584,7 @@ Monitor these metrics:
 
 ## Cost Optimization
 
-Scraping at scale can be expensive. Here are the highest-leverage optimizations:
+Scraping at scale can be expensive. Here are the biggest wins:
 
 **Use quick actions for simple pages.** Quick actions are cheaper than sessions because the browser lifecycle is optimized.
 
@@ -601,7 +601,7 @@ Scraping at scale can be expensive. Here are the highest-leverage optimizations:
     title: "CAPTCHA Solving for AI Agents",
     metaTitle: "CAPTCHA Solving for AI Agents: A Practical Guide | BrowseFleet",
     metaDescription: "How to handle CAPTCHAs in automated browser workflows. Types, solving services, integration with BrowseFleet, and ethical considerations.",
-    excerpt: "A practical guide to handling CAPTCHAs in automated browser workflows — the types you will encounter, how solving works, and how to integrate it with your agent.",
+    excerpt: "A practical guide to handling CAPTCHAs in automated browser workflows: the types you will encounter, how solving works, and how to integrate it with your agent.",
     publishedAt: "2026-03-22",
     readingTime: 7,
     headings: [
@@ -612,7 +612,7 @@ Scraping at scale can be expensive. Here are the highest-leverage optimizations:
       "Reducing CAPTCHA Frequency",
       "Ethics and Legal Considerations",
     ],
-    content: `CAPTCHAs are the most common obstacle that AI agents and scrapers encounter on the web. They are designed to distinguish humans from bots, and they are effective — without a solving strategy, your automation will fail on a significant percentage of websites.
+    content: `CAPTCHAs are the most common obstacle that AI agents and scrapers encounter on the web. They are designed to distinguish humans from bots, and they are effective. Without a solving strategy, your automation will fail on a significant percentage of websites.
 
 This guide covers the practical side of CAPTCHA handling: what you will encounter, how to solve them, and how to reduce their frequency.
 
@@ -620,7 +620,7 @@ This guide covers the practical side of CAPTCHA handling: what you will encounte
 
 CAPTCHAs serve a legitimate purpose. They protect websites from spam, credential stuffing, inventory hoarding, and abusive scraping. Sites use them as a last line of defense when other anti-bot measures (fingerprinting, rate limiting, behavioral analysis) are inconclusive.
 
-Understanding why CAPTCHAs appear helps you reduce their frequency. If your automation triggers CAPTCHAs on every request, something else is wrong — your stealth configuration, your request pattern, or your IP reputation.
+Understanding why CAPTCHAs appear helps you reduce their frequency. If your automation triggers CAPTCHAs on every request, something else is wrong: your stealth configuration, your request pattern, or your IP reputation.
 
 ## Types of CAPTCHAs
 
@@ -634,7 +634,7 @@ Understanding why CAPTCHAs appear helps you reduce their frequency. If your auto
 
 **Text-based CAPTCHAs.** Distorted text that users must read and type. These are older and less common but still appear on some sites. They are the easiest to solve with OCR.
 
-**Custom CAPTCHAs.** Some sites build their own CAPTCHA systems — slider puzzles, math problems, or drag-and-drop challenges. These require custom solving logic.
+**Custom CAPTCHAs.** Some sites build their own CAPTCHA systems: slider puzzles, math problems, or drag-and-drop challenges. These require custom solving logic.
 
 ## How Solving Services Work
 
@@ -695,7 +695,7 @@ BrowseFleet handles the detection, submission to the solving service, and token 
 
 Solving CAPTCHAs costs money and adds latency. The best strategy is to reduce how often they appear:
 
-**Use stealth mode.** BrowseFleet's stealth mode patches all known browser fingerprint leaks. Sites present CAPTCHAs when they suspect automation — good stealth reduces suspicion.
+**Use stealth mode.** BrowseFleet's stealth mode patches all known browser fingerprint leaks. Sites present CAPTCHAs when they suspect automation, so good stealth reduces suspicion.
 
 **Use residential proxies.** Datacenter IPs are frequently flagged by CAPTCHA services. Residential proxies have better reputation scores.
 
@@ -726,7 +726,7 @@ The decision to use CAPTCHA solving should be made thoughtfully, considering the
     title: "Self-Hosting Your Browser Infrastructure",
     metaTitle: "Self-Hosting Your Browser Infrastructure with Docker | BrowseFleet",
     metaDescription: "Complete guide to self-hosting BrowseFleet. Docker setup, resource planning, monitoring, scaling, and when self-hosting makes sense.",
-    excerpt: "A complete guide to running BrowseFleet on your own infrastructure — from Docker setup to resource planning and monitoring.",
+    excerpt: "A complete guide to running BrowseFleet on your own infrastructure, from Docker setup to resource planning and monitoring.",
     publishedAt: "2026-03-25",
     readingTime: 7,
     headings: [
@@ -745,7 +745,7 @@ This guide covers everything you need to get BrowseFleet running in production o
 
 Self-hosting makes sense in several scenarios:
 
-**Cost.** If you run more than 50 concurrent browser sessions consistently, self-hosting is significantly cheaper than any cloud browser API. A $200/month server can run 50+ concurrent sessions — that would cost $500+ on BrowseFleet's cloud or more on competitors.
+**Cost.** If you run more than 50 concurrent browser sessions consistently, self-hosting is significantly cheaper than any cloud browser API. A $200/month server can run 50+ concurrent sessions, which would cost $500+ on BrowseFleet's cloud or more on competitors.
 
 **Data privacy.** All browser traffic flows through your infrastructure. No third party sees your scraped data, cookies, or authentication credentials. This matters for compliance-sensitive industries and when handling personal data.
 
@@ -753,7 +753,7 @@ Self-hosting makes sense in several scenarios:
 
 **Latency.** Run BrowseFleet close to your target websites or your application servers to minimize network latency.
 
-**No rate limits.** Cloud plans have concurrency limits and daily request caps. Self-hosted BrowseFleet has no artificial limits — your only constraint is hardware.
+**No rate limits.** Cloud plans have concurrency limits and daily request caps. Self-hosted BrowseFleet has no artificial limits. Your only constraint is hardware.
 
 ## Docker Setup
 
@@ -832,7 +832,7 @@ Use these numbers to plan your infrastructure:
 | 50 | 32GB | 16 cores | 32GB/16vCPU VM |
 | 100 | 64GB | 32 cores | 64GB/32vCPU VM |
 
-These are conservative estimates. BrowseFleet manages browser lifecycle aggressively — idle sessions are suspended, crashed browsers are cleaned up, and memory is reclaimed when sessions close.
+These are conservative estimates. BrowseFleet manages browser lifecycle aggressively. Idle sessions are suspended, crashed browsers are cleaned up, and memory is reclaimed when sessions close.
 
 Add 20-30% headroom above your expected peak concurrency to handle spikes without degradation.
 
@@ -863,7 +863,7 @@ DEFAULT_PROXY=socks5://user:pass@proxy:1080
 LOG_LEVEL=info               # debug, info, warn, error
 \`\`\`
 
-For CAPTCHA solving, you need a 2captcha API key. The CAPTCHA solving feature is optional — if not configured, CAPTCHAs will not be solved automatically.
+For CAPTCHA solving, you need a 2captcha API key. The CAPTCHA solving feature is optional. If not configured, CAPTCHAs will not be solved automatically.
 
 ## Monitoring and Alerting
 
@@ -875,13 +875,13 @@ curl http://localhost:3000/metrics
 
 Key metrics to monitor:
 
-**browsefleet_active_sessions** — Current number of active browser sessions. Alert when this approaches MAX_CONCURRENT_SESSIONS.
+**browsefleet_active_sessions** - Current number of active browser sessions. Alert when this approaches MAX_CONCURRENT_SESSIONS.
 
-**browsefleet_session_duration_seconds** — Histogram of session durations. Unusually long sessions may indicate leaked sessions that are not being closed properly.
+**browsefleet_session_duration_seconds** - Histogram of session durations. Unusually long sessions may indicate leaked sessions that are not being closed properly.
 
-**browsefleet_memory_usage_bytes** — Total memory used by the BrowseFleet process and its browser instances. Alert at 80% of available RAM.
+**browsefleet_memory_usage_bytes** - Total memory used by the BrowseFleet process and its browser instances. Alert at 80% of available RAM.
 
-**browsefleet_request_errors_total** — Counter of failed requests by error type. A spike in errors indicates a systemic issue.
+**browsefleet_request_errors_total** - Counter of failed requests by error type. A spike in errors indicates a systemic issue.
 
 A basic Grafana dashboard showing these four metrics gives you sufficient visibility for most deployments.
 
@@ -889,7 +889,7 @@ A basic Grafana dashboard showing these four metrics gives you sufficient visibi
 
 When a single BrowseFleet instance is not enough:
 
-**Vertical scaling.** The simplest approach — use a larger server. BrowseFleet scales well on a single machine up to about 100 concurrent sessions. Beyond that, you hit diminishing returns due to Chrome's memory overhead.
+**Vertical scaling.** The simplest approach: use a larger server. BrowseFleet scales well on a single machine up to about 100 concurrent sessions. Beyond that, you hit diminishing returns due to Chrome's memory overhead.
 
 **Horizontal scaling with a load balancer.** Run multiple BrowseFleet instances behind a load balancer. Each instance manages its own pool of browser sessions. The load balancer distributes session creation requests across instances. Use sticky sessions so that once a session is created on an instance, subsequent requests for that session go to the same instance.
 
@@ -962,7 +962,7 @@ When you run multiple instances concurrently, memory usage multiplies:
 | 20 | 6GB | Needs 8GB+ server |
 | 50 | 15GB | Needs 32GB server |
 
-But raw memory is not the only issue. Chrome leaks memory over time. Long-running instances accumulate state — cached resources, DOM nodes, JavaScript heap objects — that the garbage collector cannot reclaim. After hours of operation, a Chrome instance that started at 200MB might be using 500MB.
+But raw memory is not the only issue. Chrome leaks memory over time. Long-running instances accumulate state (cached resources, DOM nodes, JavaScript heap objects) that the garbage collector cannot reclaim. After hours of operation, a Chrome instance that started at 200MB might be using 500MB.
 
 The solution for local Puppeteer is aggressive lifecycle management: kill and restart browser instances regularly, use incognito contexts to isolate pages, and implement watchdog processes that kill runaway browsers. This is complex code that every team writes from scratch.
 
@@ -980,7 +980,7 @@ Running Puppeteer in CI/CD pipelines is a common source of frustration. The typi
 
 **Headless mode quirks.** Chrome's headless mode (the "new headless" and the "old headless") behaves differently from headed mode in subtle ways. Some CSS features render differently, some JavaScript APIs behave differently, and some websites detect headless mode and serve different content.
 
-BrowseFleet eliminates these issues entirely. Your CI pipeline makes HTTP requests to create sessions — it does not need Chrome, its dependencies, or the memory to run it. Tests are more reliable because the browser environment is identical regardless of where the test runs.
+BrowseFleet eliminates these issues entirely. Your CI pipeline makes HTTP requests to create sessions. It does not need Chrome, its dependencies, or the memory to run it. Tests are more reliable because the browser environment is identical regardless of where the test runs.
 
 \`\`\`yaml
 # Before: CI needs Chrome, system deps, lots of RAM
@@ -1001,7 +1001,7 @@ BrowseFleet eliminates these issues entirely. Your CI pipeline makes HTTP reques
 
 The hardest problem with local Puppeteer is concurrency. Running multiple browser instances simultaneously requires:
 
-**Process management.** Each Chrome instance is a separate process with multiple child processes (renderer, GPU, utility). Managing this process tree correctly — starting, monitoring, and killing instances — is non-trivial.
+**Process management.** Each Chrome instance is a separate process with multiple child processes (renderer, GPU, utility). Managing this process tree correctly (starting, monitoring, and killing instances) is non-trivial.
 
 **Port management.** Each browser instance needs a unique debugging port. Allocating and recycling ports without conflicts requires careful bookkeeping.
 
@@ -1038,9 +1038,9 @@ await page.goto('https://example.com');
 const title = await page.title();
 \`\`\`
 
-Note that we switch from puppeteer to puppeteer-core. The full puppeteer package bundles a Chromium binary (300MB+) that you no longer need. puppeteer-core is the library without the browser — exactly what you want when connecting to a remote browser.
+Note that we switch from puppeteer to puppeteer-core. The full puppeteer package bundles a Chromium binary (300MB+) that you no longer need. puppeteer-core is the library without the browser, which is exactly what you want when connecting to a remote browser.
 
-The rest of your code does not change. Every Puppeteer API — page.goto, page.evaluate, page.screenshot, page.click, page.type — works identically. BrowseFleet provides a standard CDP WebSocket, so Puppeteer cannot tell the difference between a local browser and a cloud browser.
+The rest of your code does not change. Every Puppeteer API (page.goto, page.evaluate, page.screenshot, page.click, page.type) works identically. BrowseFleet provides a standard CDP WebSocket, so Puppeteer cannot tell the difference between a local browser and a cloud browser.
 
 ## Performance Comparison
 
@@ -1050,7 +1050,7 @@ In our benchmarks, BrowseFleet sessions are faster than local Puppeteer for most
 
 **Page load.** Network latency between BrowseFleet and the target website is typically lower than between your local machine and the target, because BrowseFleet servers are in data centers with fast network connections. For most pages, the difference is under 200ms.
 
-**Concurrent performance.** This is where the difference is dramatic. Running 20 concurrent local Puppeteer instances on a 16GB server shows significant degradation — page loads slow by 2-3x and crashes increase. BrowseFleet handles 20 concurrent sessions without degradation because each session is resource-managed.
+**Concurrent performance.** This is where the difference is dramatic. Running 20 concurrent local Puppeteer instances on a 16GB server shows significant degradation. Page loads slow by 2-3x and crashes increase. BrowseFleet handles 20 concurrent sessions without degradation because each session is resource-managed.
 
 **Cost.** Local Puppeteer is "free" but requires server infrastructure. A server capable of running 20 concurrent Chrome instances costs $100-200/month for cloud VMs. BrowseFleet's Developer plan at $99/month provides 20 concurrent sessions without the operational overhead of managing the server.
 
@@ -1061,7 +1061,7 @@ The performance advantage grows with scale. At 50+ concurrent sessions, managing
     title: "Building a Web Scraper with Claude Computer Use",
     metaTitle: "Building a Web Scraper with Claude Computer Use | BrowseFleet",
     metaDescription: "Step-by-step tutorial for building a web scraper using Claude Computer Use and BrowseFleet. Vision-based scraping for sites that resist traditional automation.",
-    excerpt: "A hands-on tutorial for building a vision-based web scraper using Claude Computer Use and BrowseFleet's Computer API — for sites that resist traditional selectors.",
+    excerpt: "A hands-on tutorial for building a vision-based web scraper using Claude Computer Use and BrowseFleet's Computer API, for sites that resist traditional selectors.",
     publishedAt: "2026-03-29",
     readingTime: 9,
     headings: [
@@ -1073,7 +1073,7 @@ The performance advantage grows with scale. At 50+ concurrent sessions, managing
       "A Real-World Example: Extracting Pricing Data",
       "Cost and Performance Considerations",
     ],
-    content: `Claude Computer Use is Anthropic's API for letting Claude interact with computer interfaces through screenshots. Instead of parsing HTML or using CSS selectors, Claude looks at a screenshot of a web page and decides what to click, type, or scroll — the same way a human would.
+    content: `Claude Computer Use is Anthropic's API for letting Claude interact with computer interfaces through screenshots. Instead of parsing HTML or using CSS selectors, Claude looks at a screenshot of a web page and decides what to click, type, or scroll, the same way a human would.
 
 BrowseFleet's Computer API was built specifically for this workflow. Every action you execute returns a screenshot, creating the continuous feedback loop that Claude needs to navigate and interact with websites.
 
@@ -1105,10 +1105,10 @@ Traditional scraping (CSS selectors, XPath, DOM traversal) is faster and cheaper
 
 BrowseFleet's Computer API provides four actions that map directly to what Claude needs:
 
-- **navigate(sessionId, url)** — Go to a URL, return screenshot
-- **click(sessionId, x, y)** — Click at coordinates, return screenshot
-- **type(sessionId, text)** — Type text, return screenshot
-- **scroll(sessionId, direction, amount)** — Scroll, return screenshot
+- **navigate(sessionId, url)** - Go to a URL, return screenshot
+- **click(sessionId, x, y)** - Click at coordinates, return screenshot
+- **type(sessionId, text)** - Type text, return screenshot
+- **scroll(sessionId, direction, amount)** - Scroll, return screenshot
 
 Every action returns a base64-encoded PNG screenshot that you can pass directly to Claude.
 
@@ -1229,7 +1229,7 @@ async function scrapeProducts(url: string): Promise<Product[]> {
 
 ## Handling Dynamic Content
 
-Many sites load content dynamically — lazy-loaded images, infinite scroll, expandable sections, and AJAX-loaded data. Vision-based scraping handles these naturally:
+Many sites load content dynamically: lazy-loaded images, infinite scroll, expandable sections, and AJAX-loaded data. Vision-based scraping handles these naturally:
 
 **Infinite scroll.** Tell Claude to scroll down and check for new content. After each scroll, extract any new data that appeared.
 
@@ -1255,7 +1255,7 @@ do {
 
 **Expandable sections.** Ask Claude to identify and click "show more" or "expand" elements, then extract the revealed content.
 
-**Tabs and filters.** Tell Claude to click on each tab or filter option, extract data, then move to the next one. The visual approach makes this trivial — Claude can see the tab bar and knows which tab is currently active.
+**Tabs and filters.** Tell Claude to click on each tab or filter option, extract data, then move to the next one. The visual approach makes this trivial. Claude can see the tab bar and knows which tab is currently active.
 
 ## A Real-World Example: Extracting Pricing Data
 
@@ -1310,7 +1310,7 @@ This works even on pricing pages with complex layouts, interactive sliders, togg
 
 Vision-based scraping is more expensive than traditional scraping:
 
-**API costs.** Each Claude API call with a screenshot costs roughly $0.01-0.03 depending on image size and response length. For a scraping job that requires 10 screenshots per page, that is $0.10-0.30 per page — significantly more than selector-based scraping.
+**API costs.** Each Claude API call with a screenshot costs roughly $0.01-0.03 depending on image size and response length. For a scraping job that requires 10 screenshots per page, that is $0.10-0.30 per page, significantly more than selector-based scraping.
 
 **Latency.** Each screenshot-to-action cycle takes 2-5 seconds (1-2s for the API call, 1-2s for the action and page load). A multi-step scraping workflow might take 30-60 seconds per page.
 
@@ -1394,7 +1394,7 @@ Even with perfect browser fingerprinting, behavioral analysis can catch automate
 
 **Typing patterns.** Humans type at variable speeds with natural pauses. Bots type at uniform speeds or insert text instantly via JavaScript.
 
-**Navigation patterns.** Humans browse in non-linear patterns — they scroll, pause, go back, open new tabs. Bots follow predetermined paths at consistent speeds.
+**Navigation patterns.** Humans browse in non-linear patterns. They scroll, pause, go back, open new tabs. Bots follow predetermined paths at consistent speeds.
 
 **Timing.** Humans have variable reaction times. They pause to read content, hesitate before clicking, and take breaks. Bots interact at machine speed with consistent timing.
 
@@ -1434,7 +1434,7 @@ Mobile proxies ($15-30/GB) use mobile carrier IP addresses. They have the best r
 
 **Geographic consistency.** The proxy IP's location should match the browser's timezone, language, and locale settings. A browser claiming to be in New York but connecting from a Russian IP is suspicious.
 
-**Session-level rotation.** Assign each BrowseFleet session its own proxy. This prevents cross-request correlation — anti-bot systems cannot link multiple requests from different sessions.
+**Session-level rotation.** Assign each BrowseFleet session its own proxy. This prevents cross-request correlation. Anti-bot systems cannot link multiple requests from different sessions.
 
 \`\`\`typescript
 const session = await bf.sessions.create({
@@ -1450,10 +1450,10 @@ const session = await bf.sessions.create({
 Before running your automation against target sites, test your stealth configuration:
 
 **Bot detection test sites:**
-- bot.sannysoft.com — Tests for common automation flags
-- browserleaks.com — Comprehensive fingerprint analysis
-- pixelscan.net — Cross-references multiple fingerprint signals
-- nowsecure.nl — Tests specifically for Chrome DevTools Protocol detection
+- bot.sannysoft.com - Tests for common automation flags
+- browserleaks.com - Full fingerprint analysis
+- pixelscan.net - Cross-references multiple fingerprint signals
+- nowsecure.nl - Tests specifically for Chrome DevTools Protocol detection
 
 **Manual verification.** Navigate to your target site and visually inspect whether CAPTCHAs appear, content loads correctly, and the site behaves normally.
 
@@ -1461,7 +1461,7 @@ Before running your automation against target sites, test your stealth configura
 
 ## BrowseFleet's Stealth Implementation
 
-BrowseFleet's stealth mode applies a comprehensive set of patches that address all detection categories:
+BrowseFleet's stealth mode applies a thorough set of patches that address all detection categories:
 
 **Full mode** (stealth: 'full') applies all available stealth patches:
 - navigator.webdriver set to undefined
@@ -1488,8 +1488,8 @@ In our testing, BrowseFleet's full stealth mode passes all common bot detection 
     slug: "programmatic-seo-headless-browsers",
     title: "Programmatic SEO with Headless Browsers",
     metaTitle: "Programmatic SEO with Headless Browsers | BrowseFleet",
-    metaDescription: "Use headless browsers for programmatic SEO — competitor analysis, content generation at scale, automated auditing, and visual regression testing.",
-    excerpt: "How to use headless browsers for programmatic SEO — from competitor analysis and content auditing to automated screenshot-based visual testing.",
+    metaDescription: "Use headless browsers for programmatic SEO - competitor analysis, content generation at scale, automated auditing, and visual regression testing.",
+    excerpt: "How to use headless browsers for programmatic SEO, from competitor analysis and content auditing to automated screenshot-based visual testing.",
     publishedAt: "2026-04-01",
     readingTime: 7,
     headings: [
@@ -1500,7 +1500,7 @@ In our testing, BrowseFleet's full stealth mode passes all common bot detection 
       "Automated Visual Audits",
       "Building Your pSEO Pipeline",
     ],
-    content: `Programmatic SEO (pSEO) is the practice of creating large numbers of targeted pages algorithmically rather than writing each one by hand. Instead of publishing 10 pages, you publish 1,000 — each targeting a specific long-tail keyword, comparison, or use case.
+    content: `Programmatic SEO (pSEO) is the practice of creating large numbers of targeted pages algorithmically rather than writing each one by hand. Instead of publishing 10 pages, you publish 1,000, each targeting a specific long-tail keyword, comparison, or use case.
 
 Headless browsers are essential tools for pSEO at every stage: researching competitors, auditing your own content, collecting data for page generation, and testing the visual quality of generated pages.
 
@@ -1518,7 +1518,7 @@ Common pSEO patterns:
 
 **Location pages.** For local businesses or services: a page for every city, neighborhood, or region you serve.
 
-The key to successful pSEO is content quality. Google's Helpful Content Update penalizes thin, templated content. Each page needs genuine, useful information — not just keyword-stuffed templates.
+The key to successful pSEO is content quality. Google's Helpful Content Update penalizes thin, templated content. Each page needs genuine, useful information, not just keyword-stuffed templates.
 
 ## Using Headless Browsers for pSEO
 
@@ -1647,7 +1647,7 @@ A complete pSEO pipeline has four stages:
 
 **Stage 1: Data collection.** Use BrowseFleet to scrape competitor data, industry information, and other data sources. Store the raw data in a structured format.
 
-**Stage 2: Content generation.** Use the collected data to generate page content. This can be template-based (filling in variables) or AI-generated (using an LLM to write unique content for each page). The best approach combines both — templates for structure, AI for unique prose.
+**Stage 2: Content generation.** Use the collected data to generate page content. This can be template-based (filling in variables) or AI-generated (using an LLM to write unique content for each page). The best approach combines both: templates for structure, AI for unique prose.
 
 **Stage 3: Build and deploy.** Generate the actual pages using your framework (Next.js with generateStaticParams is ideal for this). Deploy to your hosting provider.
 
@@ -1673,7 +1673,7 @@ The combination of BrowseFleet for data collection and quality assurance, and Ne
       "Handling Browser Drivers",
       "What Changes and What Does Not",
     ],
-    content: `Selenium WebDriver has been the standard for browser automation since 2011. Millions of test suites, scraping scripts, and automation workflows are built on it. It works. But managing the infrastructure around it — browser installations, driver versions, grid servers, and Docker containers — has become the bottleneck.
+    content: `Selenium WebDriver has been the standard for browser automation since 2011. Millions of test suites, scraping scripts, and automation workflows are built on it. It works. But managing the infrastructure around it (browser installations, driver versions, grid servers, and Docker containers) has become the bottleneck.
 
 Cloud browsers eliminate that bottleneck. BrowseFleet provides a Selenium-compatible endpoint, so your existing tests work with minimal changes.
 
@@ -1685,7 +1685,7 @@ Teams do not leave Selenium because it is a bad tool. They leave because of the 
 
 **Browser installation.** Each test environment needs a browser installed. CI containers need Chrome, its 20+ system dependencies, and enough memory to run it. Different CI providers have different base images, leading to "works on my machine" problems.
 
-**Selenium Grid.** For parallel testing, teams set up Selenium Grid — a hub-and-node architecture for distributing tests across browser instances. Grid is complex to configure, monitor, and maintain. Node registration, session timeouts, and resource limits all need tuning.
+**Selenium Grid.** For parallel testing, teams set up Selenium Grid, a hub-and-node architecture for distributing tests across browser instances. Grid is complex to configure, monitor, and maintain. Node registration, session timeouts, and resource limits all need tuning.
 
 **Docker overhead.** Running Selenium in Docker (via selenium/standalone-chrome or similar images) works but consumes significant resources. Each container needs 512MB-1GB of RAM. Running 20 parallel tests requires 10-20GB of RAM just for browsers.
 
@@ -1693,7 +1693,7 @@ Teams do not leave Selenium because it is a bad tool. They leave because of the 
 
 ## BrowseFleet's Selenium Compatibility
 
-BrowseFleet provides a Remote WebDriver endpoint that accepts standard Selenium connections. Your existing Selenium tests connect to BrowseFleet instead of a local browser or Selenium Grid. The WebDriver protocol is the same — BrowseFleet translates it to CDP internally.
+BrowseFleet provides a Remote WebDriver endpoint that accepts standard Selenium connections. Your existing Selenium tests connect to BrowseFleet instead of a local browser or Selenium Grid. The WebDriver protocol is the same. BrowseFleet translates it to CDP internally.
 
 This means:
 - No ChromeDriver or GeckoDriver to install or manage
@@ -1705,7 +1705,7 @@ Your tests send WebDriver commands to BrowseFleet's HTTP endpoint. BrowseFleet m
 
 ## Step-by-Step Migration
 
-**Step 1: Install the BrowseFleet SDK.** This is optional for Selenium — you can use the Remote WebDriver URL directly. But the SDK makes session management easier.
+**Step 1: Install the BrowseFleet SDK.** This is optional for Selenium. You can use the Remote WebDriver URL directly. But the SDK makes session management easier.
 
 \`\`\`bash
 # Python
@@ -1799,7 +1799,7 @@ driver = webdriver.Remote(
     options=webdriver.ChromeOptions(),
 )
 
-# Same test — no changes
+# Same test - no changes
 driver.get('https://myapp.com')
 assert 'My App' in driver.title
 
@@ -1854,14 +1854,14 @@ That is it. No browser binaries, no driver binaries, no system dependencies. The
 - Infrastructure (no more Grid servers, Docker containers, or browser management)
 
 **What does not change:**
-- Test logic (find elements, click, type, assert — all identical)
+- Test logic (find elements, click, type, assert - all identical)
 - Test structure (test classes, setup, teardown patterns)
-- Locator strategies (ID, name, CSS, XPath — all supported)
-- Assertions (page title, element text, visibility — all work)
-- Wait strategies (explicit waits, expected conditions — all work)
+- Locator strategies (ID, name, CSS, XPath - all supported)
+- Assertions (page title, element text, visibility - all work)
+- Wait strategies (explicit waits, expected conditions - all work)
 - Page Object patterns (your page objects do not change)
 
-The migration is mechanical — change the setup, keep the tests. Most teams complete it in an afternoon.
+The migration is mechanical. Change the setup, keep the tests. Most teams complete it in an afternoon.
 
 **New capabilities after migration:**
 - Stealth mode for accessing bot-protected sites
