@@ -1,5 +1,6 @@
 import { blogPosts } from "@/data/blog-posts";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
@@ -288,12 +289,12 @@ export default async function BlogPostPage({
       {/* Header */}
       <section className="border-b border-zinc-800/50">
         <div className="max-w-3xl mx-auto px-6 pt-24 pb-16">
-          <a
+          <Link
             href="/blog"
             className="text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-6 block"
           >
             Back to Blog
-          </a>
+          </Link>
           <h1 className="text-4xl font-bold tracking-tight text-white mb-4">
             {post.title}
           </h1>
@@ -348,7 +349,7 @@ export default async function BlogPostPage({
               .filter((p) => p.slug !== post.slug)
               .slice(0, 4)
               .map((relatedPost) => (
-                <a
+                <Link
                   key={relatedPost.slug}
                   href={`/blog/${relatedPost.slug}`}
                   className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4 hover:border-zinc-600 transition-colors"
@@ -359,7 +360,7 @@ export default async function BlogPostPage({
                   <p className="text-xs text-zinc-500">
                     {relatedPost.readingTime} min read
                   </p>
-                </a>
+                </Link>
               ))}
           </div>
         </div>
@@ -376,18 +377,18 @@ export default async function BlogPostPage({
             required.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <a
+            <Link
               href="/docs/quickstart"
               className="rounded-lg bg-purple-600 px-8 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
             >
               Get Started
-            </a>
-            <a
+            </Link>
+            <Link
               href="/docs"
               className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
             >
               Documentation
-            </a>
+            </Link>
           </div>
         </div>
       </section>

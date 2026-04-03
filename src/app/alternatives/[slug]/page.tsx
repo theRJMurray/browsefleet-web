@@ -1,5 +1,6 @@
 import { alternatives } from "@/data/alternatives";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
@@ -171,18 +172,18 @@ export default async function AlternativePage({
             required.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <a
+            <Link
               href="/docs/quickstart"
               className="rounded-lg bg-purple-600 px-8 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
             >
               Get Started
-            </a>
-            <a
+            </Link>
+            <Link
               href="/pricing"
               className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
             >
               View Pricing
-            </a>
+            </Link>
           </div>
         </div>
       </section>

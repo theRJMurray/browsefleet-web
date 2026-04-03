@@ -1,5 +1,6 @@
 import { useCases } from "@/data/use-cases";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
@@ -116,34 +117,34 @@ export default async function UseCasePage({
         <div className="max-w-4xl mx-auto px-6 py-16">
           <h2 className="text-2xl font-bold text-white mb-6">Learn More</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <a
+            <Link
               href="/docs/quickstart"
               className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-zinc-600 transition-colors"
             >
               <p className="text-sm font-semibold text-white mb-1">Quickstart Guide</p>
               <p className="text-xs text-zinc-500">Get up and running in 2 minutes</p>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/docs/sessions"
               className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-zinc-600 transition-colors"
             >
               <p className="text-sm font-semibold text-white mb-1">Sessions API</p>
               <p className="text-xs text-zinc-500">Full reference for browser sessions</p>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/docs/stealth"
               className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-zinc-600 transition-colors"
             >
               <p className="text-sm font-semibold text-white mb-1">Stealth Mode</p>
               <p className="text-xs text-zinc-500">Anti-detection configuration</p>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/pricing"
               className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-zinc-600 transition-colors"
             >
               <p className="text-sm font-semibold text-white mb-1">Pricing</p>
               <p className="text-xs text-zinc-500">Plans starting with a free tier</p>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -158,18 +159,18 @@ export default async function UseCasePage({
             Free tier includes 500 daily requests. No credit card required.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <a
+            <Link
               href="/docs/quickstart"
               className="rounded-lg bg-purple-600 px-8 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
             >
               Get Started
-            </a>
-            <a
+            </Link>
+            <Link
               href="/docs"
               className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
             >
               Documentation
-            </a>
+            </Link>
           </div>
         </div>
       </section>

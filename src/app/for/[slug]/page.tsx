@@ -1,5 +1,6 @@
 import { audiences } from "@/data/audiences";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
@@ -96,13 +97,13 @@ export default async function AudiencePage({
           </h2>
           <div className="flex flex-wrap gap-3">
             {aud.relevantFeatures.map((feature) => (
-              <a
+              <Link
                 key={feature}
                 href={`/docs/${feature.toLowerCase().replace(/\s+/g, "-")}`}
                 className="rounded-lg border border-zinc-700 bg-zinc-900/50 px-4 py-2 text-sm text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
               >
                 {feature}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -113,34 +114,34 @@ export default async function AudiencePage({
         <div className="max-w-4xl mx-auto px-6 py-16">
           <h2 className="text-2xl font-bold text-white mb-6">Explore</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <a
+            <Link
               href="/use-cases/web-scraping"
               className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-zinc-600 transition-colors"
             >
               <p className="text-sm font-semibold text-white mb-1">Web Scraping</p>
               <p className="text-xs text-zinc-500">Extract data from any website at scale</p>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/use-cases/ai-agents"
               className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-zinc-600 transition-colors"
             >
               <p className="text-sm font-semibold text-white mb-1">AI Web Agents</p>
               <p className="text-xs text-zinc-500">Build agents that browse the web</p>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/integrations/puppeteer"
               className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-zinc-600 transition-colors"
             >
               <p className="text-sm font-semibold text-white mb-1">Puppeteer Integration</p>
               <p className="text-xs text-zinc-500">One-line connection to cloud browsers</p>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/blog"
               className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-zinc-600 transition-colors"
             >
               <p className="text-sm font-semibold text-white mb-1">Blog</p>
               <p className="text-xs text-zinc-500">Guides, tutorials, and best practices</p>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -150,18 +151,18 @@ export default async function AudiencePage({
         <div className="max-w-4xl mx-auto px-6 py-20 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">{aud.cta}</h2>
           <div className="flex items-center justify-center gap-4 mt-8">
-            <a
+            <Link
               href="/docs/quickstart"
               className="rounded-lg bg-purple-600 px-8 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
             >
               Get Started
-            </a>
-            <a
+            </Link>
+            <Link
               href="/pricing"
               className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
             >
               View Pricing
-            </a>
+            </Link>
           </div>
         </div>
       </section>

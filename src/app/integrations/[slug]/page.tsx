@@ -1,5 +1,6 @@
 import { integrations } from "@/data/integrations";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
@@ -110,27 +111,27 @@ export default async function IntegrationPage({
         <div className="max-w-4xl mx-auto px-6 py-16">
           <h2 className="text-2xl font-bold text-white mb-6">Related</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <a
+            <Link
               href="/docs/quickstart"
               className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-zinc-600 transition-colors"
             >
               <p className="text-sm font-semibold text-white mb-1">Quickstart</p>
               <p className="text-xs text-zinc-500">Get started in 2 minutes</p>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/docs/sessions"
               className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-zinc-600 transition-colors"
             >
               <p className="text-sm font-semibold text-white mb-1">Sessions API</p>
               <p className="text-xs text-zinc-500">Full session reference</p>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/docs/sdks"
               className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-zinc-600 transition-colors"
             >
               <p className="text-sm font-semibold text-white mb-1">SDKs</p>
               <p className="text-xs text-zinc-500">Language-specific SDKs</p>
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -145,18 +146,18 @@ export default async function IntegrationPage({
             Free tier includes 500 daily requests. Connect {int.name} in minutes.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <a
+            <Link
               href="/docs/quickstart"
               className="rounded-lg bg-purple-600 px-8 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
             >
               Get Started
-            </a>
-            <a
+            </Link>
+            <Link
               href="/docs"
               className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
             >
               Documentation
-            </a>
+            </Link>
           </div>
         </div>
       </section>
