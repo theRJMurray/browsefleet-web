@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "BrowseFleet — Cloud Browser API for AI Agents",
@@ -57,7 +49,7 @@ function Footer() {
           <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-3">Resources</p>
           <div className="space-y-2">
             <a href="https://github.com/theRJMurray/browsefleet" className="block text-xs text-zinc-500 hover:text-white transition-colors">GitHub</a>
-            <a href="/docs/self-hosting" className="block text-xs text-zinc-500 hover:text-white transition-colors">Self-Hosting</a>
+            <a href="/docs/quickstart" className="block text-xs text-zinc-500 hover:text-white transition-colors">Self-Hosting</a>
           </div>
         </div>
         <div>
@@ -77,14 +69,11 @@ function Footer() {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${inter.className} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <Nav />
         <main className="flex-1 pt-16">{children}</main>
