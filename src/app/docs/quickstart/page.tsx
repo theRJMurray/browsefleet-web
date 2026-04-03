@@ -1,4 +1,5 @@
 import { CodeTabs } from "@/components/code-tabs";
+import Link from "next/link";
 
 export default function QuickstartPage() {
   return (
@@ -219,12 +220,12 @@ with open("screenshot.png", "wb") as f:
           Explore the full API reference for sessions, computer API, agents, and more.
         </p>
         <div className="flex items-center justify-center gap-4">
-          <a href="/docs/sessions" className="rounded-lg bg-purple-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-purple-500 transition-colors">
+          <Link href="/docs/sessions" className="rounded-lg bg-purple-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-purple-500 transition-colors">
             Sessions API
-          </a>
-          <a href="/docs/computer-api" className="rounded-lg border border-zinc-700 px-6 py-2.5 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors">
+          </Link>
+          <Link href="/docs/computer-api" className="rounded-lg border border-zinc-700 px-6 py-2.5 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors">
             Computer API
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const FEATURES = [
   {
     title: "Sessions API",
@@ -83,18 +85,18 @@ export default function HomePage() {
               Built-in stealth, CAPTCHA solving, and proxy rotation.
             </p>
             <div className="flex items-center gap-4">
-              <a
+              <Link
                 href="/docs/quickstart"
                 className="rounded-lg bg-purple-600 px-6 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
               >
                 Get Started
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/docs"
                 className="rounded-lg border border-zinc-700 px-6 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
               >
                 Read the Docs
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -201,7 +203,7 @@ export default function HomePage() {
                     <p className="text-xs text-zinc-400">CDP WebSocket</p>
                   </div>
                 </div>
-                <a
+                <Link
                   href="/dashboard"
                   className={`block text-center mt-6 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors ${
                     tier.highlight
@@ -210,7 +212,7 @@ export default function HomePage() {
                   }`}
                 >
                   Get Started
-                </a>
+                </Link>
               </div>
             ))}
           </div>
@@ -222,15 +224,15 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6 py-20 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Ready to automate the web?</h2>
           <p className="text-zinc-400 mb-8 max-w-lg mx-auto">
-            Get started in under 2 minutes. Free tier includes 100 browser hours.
+            Get started in under 2 minutes. Free tier includes 500 requests per day.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <a href="/dashboard" className="rounded-lg bg-purple-600 px-8 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors">
+            <Link href="/dashboard" className="rounded-lg bg-purple-600 px-8 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors">
               Start Free
-            </a>
-            <a href="/docs" className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors">
+            </Link>
+            <Link href="/docs" className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors">
               Documentation
-            </a>
+            </Link>
           </div>
         </div>
       </section>

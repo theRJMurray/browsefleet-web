@@ -25,7 +25,7 @@ export const audiences: Audience[] = [
       "Stealth, CAPTCHA solving, and proxy rotation are built in — no additional libraries or services to configure",
       "Consistent browser environment eliminates flaky tests and environment-specific bugs",
       "Scale to 100 concurrent sessions without provisioning servers or managing containers",
-      "Comprehensive documentation with copy-paste code examples for every feature",
+      "Detailed documentation with copy-paste code examples for every feature",
       "Open-source and self-hostable — audit the code, contribute fixes, run it on your infrastructure",
     ],
     relevantFeatures: ["Sessions API", "Quick Actions", "Stealth Mode", "Self-Hosting", "SDKs"],

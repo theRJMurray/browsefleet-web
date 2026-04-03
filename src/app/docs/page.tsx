@@ -1,4 +1,5 @@
 import { CodeBlock } from "@/components/code-block";
+import Link from "next/link";
 
 const ARCHITECTURE = `Client (Puppeteer / Playwright / SDK)
   |
@@ -89,22 +90,22 @@ export default function DocsPage() {
       <CodeBlock code={ARCHITECTURE} language="text" />
 
       <div className="mt-10 grid grid-cols-2 gap-4">
-        <a href="/docs/quickstart" className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-purple-600/50 transition-colors">
+        <Link href="/docs/quickstart" className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-purple-600/50 transition-colors">
           <h3 className="text-sm font-semibold text-white mb-1">Quickstart</h3>
           <p className="text-xs text-zinc-500">Get up and running in under 2 minutes.</p>
-        </a>
-        <a href="/docs/sessions" className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-purple-600/50 transition-colors">
+        </Link>
+        <Link href="/docs/sessions" className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-purple-600/50 transition-colors">
           <h3 className="text-sm font-semibold text-white mb-1">Sessions API</h3>
           <p className="text-xs text-zinc-500">Full session lifecycle reference.</p>
-        </a>
-        <a href="/docs/sdks" className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-purple-600/50 transition-colors">
+        </Link>
+        <Link href="/docs/sdks" className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-purple-600/50 transition-colors">
           <h3 className="text-sm font-semibold text-white mb-1">SDKs</h3>
           <p className="text-xs text-zinc-500">Node.js and Python client libraries.</p>
-        </a>
-        <a href="/docs/self-hosting" className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-purple-600/50 transition-colors">
+        </Link>
+        <Link href="/docs/self-hosting" className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 hover:border-purple-600/50 transition-colors">
           <h3 className="text-sm font-semibold text-white mb-1">Self-Hosting</h3>
           <p className="text-xs text-zinc-500">Deploy BrowseFleet on your own infrastructure.</p>
-        </a>
+        </Link>
       </div>
     </div>
   );

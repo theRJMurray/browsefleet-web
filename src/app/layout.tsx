@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -59,40 +60,40 @@ function Nav() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-xl">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="/" className="text-lg font-bold tracking-tight text-white">
+        <Link href="/" className="text-lg font-bold tracking-tight text-white">
           BrowseFleet
-        </a>
+        </Link>
         <div className="flex items-center gap-8">
-          <a
+          <Link
             href="/docs"
             className="text-sm text-zinc-400 hover:text-white transition-colors"
           >
             Docs
-          </a>
-          <a
+          </Link>
+          <Link
             href="/pricing"
             className="text-sm text-zinc-400 hover:text-white transition-colors"
           >
             Pricing
-          </a>
-          <a
+          </Link>
+          <Link
             href="/blog"
             className="text-sm text-zinc-400 hover:text-white transition-colors"
           >
             Blog
-          </a>
+          </Link>
           <a
             href="https://github.com/theRJMurray/browsefleet"
             className="text-sm text-zinc-400 hover:text-white transition-colors"
           >
             GitHub
           </a>
-          <a
+          <Link
             href="/dashboard"
             className="rounded-lg bg-purple-600 px-4 py-2 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
           >
             Dashboard
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
@@ -110,48 +111,48 @@ function Footer() {
               Product
             </p>
             <div className="space-y-2.5">
-              <a
+              <Link
                 href="/docs/sessions"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Sessions API
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/docs/scraping"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Scraping
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/docs/screenshots"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Screenshots
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/docs/computer-api"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Computer API
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/docs/agent"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Agent API
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/docs/profiles"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Profiles
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/pricing"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Pricing
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -161,36 +162,36 @@ function Footer() {
               Resources
             </p>
             <div className="space-y-2.5">
-              <a
+              <Link
                 href="/docs"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Documentation
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/docs/quickstart"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Quickstart
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/docs/self-hosting"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Self-Hosting
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/docs/sdks"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 SDKs
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/blog"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Blog
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -200,24 +201,24 @@ function Footer() {
               Comparisons
             </p>
             <div className="space-y-2.5">
-              <a
+              <Link
                 href="/alternatives/steel"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 vs Steel
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/alternatives/browserbase"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 vs Browserbase
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/alternatives/apify"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 vs Apify
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -227,36 +228,36 @@ function Footer() {
               Use Cases
             </p>
             <div className="space-y-2.5">
-              <a
+              <Link
                 href="/use-cases/web-scraping"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Web Scraping
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/use-cases/ai-agents"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 AI Agents
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/use-cases/lead-generation"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Lead Generation
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/use-cases/price-monitoring"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Price Monitoring
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/use-cases/data-extraction"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Data Extraction
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -266,30 +267,30 @@ function Footer() {
               Integrations
             </p>
             <div className="space-y-2.5">
-              <a
+              <Link
                 href="/integrations/puppeteer"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Puppeteer
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/integrations/playwright"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Playwright
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/integrations/selenium"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Selenium
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/integrations/claude-computer-use"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Claude Computer Use
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -299,24 +300,24 @@ function Footer() {
               Company
             </p>
             <div className="space-y-2.5">
-              <a
+              <Link
                 href="/blog"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Blog
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/pricing"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Pricing
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/dashboard"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"
               >
                 Dashboard
-              </a>
+              </Link>
               <a
                 href="https://github.com/theRJMurray/browsefleet"
                 className="block text-sm text-zinc-500 hover:text-white transition-colors"

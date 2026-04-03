@@ -1,5 +1,6 @@
 import { blogPosts } from "@/data/blog-posts";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Blog — BrowseFleet",
@@ -48,7 +49,7 @@ export default function BlogIndexPage() {
         <div className="max-w-4xl mx-auto px-6 py-16">
           <div className="grid grid-cols-1 gap-6">
             {sortedPosts.map((post) => (
-              <a
+              <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
                 className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-6 hover:border-zinc-600 transition-colors block"
@@ -68,7 +69,7 @@ export default function BlogIndexPage() {
                 <p className="text-sm text-zinc-400 leading-relaxed">
                   {post.excerpt}
                 </p>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
