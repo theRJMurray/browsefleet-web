@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HeroBrowserAnimation } from "@/components/hero-browser-animation";
 
 const FEATURES = [
   {
@@ -71,32 +72,37 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 pt-24 pb-20">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold text-purple-400 uppercase tracking-widest mb-4">
-              Cloud Browser API
-            </p>
-            <h1 className="text-5xl font-bold tracking-tight text-white leading-tight mb-6">
-              Headless browsers for
-              <br />
-              AI agents and developers
-            </h1>
-            <p className="text-lg text-zinc-400 leading-relaxed mb-8 max-w-xl">
-              Launch managed browser sessions in the cloud. Connect with Puppeteer, Playwright, or Selenium.
-              Built-in stealth, CAPTCHA solving, and proxy rotation.
-            </p>
-            <div className="flex items-center gap-4">
-              <Link
-                href="/docs/quickstart"
-                className="rounded-lg bg-purple-600 px-6 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
-              >
-                Get Started
-              </Link>
-              <Link
-                href="/docs"
-                className="rounded-lg border border-zinc-700 px-6 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
-              >
-                Read the Docs
-              </Link>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-sm font-semibold text-purple-400 uppercase tracking-widest mb-4">
+                Cloud Browser API
+              </p>
+              <h1 className="text-5xl font-bold tracking-tight text-white leading-tight mb-6">
+                Headless browsers for
+                <br />
+                AI agents and developers
+              </h1>
+              <p className="text-lg text-zinc-400 leading-relaxed mb-8 max-w-xl">
+                Launch managed browser sessions in the cloud. Connect with Puppeteer, Playwright, or Selenium.
+                Built-in stealth, CAPTCHA solving, and proxy rotation.
+              </p>
+              <div className="flex items-center gap-4">
+                <Link
+                  href="/docs/quickstart"
+                  className="rounded-lg bg-purple-600 px-6 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
+                >
+                  Get Started
+                </Link>
+                <Link
+                  href="/docs"
+                  className="rounded-lg border border-zinc-700 px-6 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
+                >
+                  Read the Docs
+                </Link>
+              </div>
+            </div>
+            <div className="hidden lg:block">
+              <HeroBrowserAnimation />
             </div>
           </div>
         </div>
