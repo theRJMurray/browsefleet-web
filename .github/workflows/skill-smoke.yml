@@ -1,0 +1,40 @@
+name: skill.md smoke test
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+    paths:
+      - 'skill.md'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'src/**'
+      - 'next.config.ts'
+      - '.github/workflows/skill-smoke.yml'
+
+concurrency:
+  group: skill-smoke-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  tldr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Run the skill.md TL;DR
+        run: |
+          set -ex
+          npm ci
+          npm run lint
+          npm run build

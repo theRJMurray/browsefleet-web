@@ -23,7 +23,6 @@ const NAV_SECTIONS = [
       { label: "CAPTCHA Solving", href: "/docs/captcha" },
       { label: "Profiles", href: "/docs/profiles" },
       { label: "Files", href: "/docs/files" },
-      { label: "Billing", href: "/docs/billing" },
     ],
   },
   {

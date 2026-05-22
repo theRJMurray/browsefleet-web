@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# browsefleet-web
 
-## Getting Started
+The marketing site for [BrowseFleet](https://github.com/theRJMurray/browsefleet), live at [browsefleet.com](https://browsefleet.com).
 
-First, run the development server:
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D20-43853d.svg)](./.nvmrc)
+[![Built with Next.js](https://img.shields.io/badge/built%20with-next.js-000000.svg)](https://nextjs.org)
+
+Next.js 15 (App Router) + Tailwind, static-exported, deployed to Vercel. Open source so contributors can fix copy and docs via PR, and so anyone curious about the project can read the site that pitches them on it.
+
+> **Working in this repo with an AI agent?** Read [`skill.md`](./skill.md) first. It teaches Claude Code, Cursor, Aider, or any coding agent how to set up, build, and contribute to this site with no further instruction.
+
+## Quick start
 
 ```bash
+git clone https://github.com/theRJMurray/browsefleet-web.git
+cd browsefleet-web
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Sibling repos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [`browsefleet`](https://github.com/theRJMurray/browsefleet), the API server.
+- [`browsefleet-node`](https://github.com/theRJMurray/browsefleet-node), the Node.js SDK.
+- [`browsefleet-python`](https://github.com/theRJMurray/browsefleet-python), the Python SDK.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contributing
 
-## Learn More
+See [`CONTRIBUTING.md`](./CONTRIBUTING.md) and [`skill.md`](./skill.md). Conventional Commits, squash-merge, base branch `master`.
 
-To learn more about Next.js, take a look at the following resources:
+## Security
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Do not file security issues publicly. See [`SECURITY.md`](./SECURITY.md).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT. See [`LICENSE`](./LICENSE).

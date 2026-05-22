@@ -150,18 +150,27 @@ export default async function AudiencePage({
       <section>
         <div className="max-w-4xl mx-auto px-6 py-20 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">{aud.cta}</h2>
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <Link
-              href="/docs/quickstart"
+          <p className="text-zinc-400 mb-8 max-w-lg mx-auto">
+            BrowseFleet is open source and MIT licensed. You host it; the only cost is your VPS.
+          </p>
+          <div className="flex items-center justify-center gap-4 flex-wrap mt-8">
+            <a
+              href="https://github.com/theRJMurray/browsefleet"
               className="rounded-lg bg-purple-600 px-8 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
             >
-              Get Started
-            </Link>
+              Star on GitHub
+            </a>
             <Link
-              href="/pricing"
+              href="/self-host"
               className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
             >
-              View Pricing
+              Self-host guide
+            </Link>
+            <Link
+              href="/docs"
+              className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
+            >
+              Documentation
             </Link>
           </div>
         </div>
