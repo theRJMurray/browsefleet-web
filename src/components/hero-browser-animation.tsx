@@ -204,7 +204,7 @@ function SingleBrowser() {
         <TrafficLights />
         <div className="flex gap-px ml-2 flex-1 min-w-0">
           <div className="hba-tab-1 flex items-center gap-1 px-2.5 py-0.5 rounded-t text-[8px] bg-[#0c0c0f] text-zinc-300 border-t border-x border-zinc-700/40 max-w-[90px] truncate">
-            Dashboard
+            Sessions
           </div>
           <div className="hba-tab-2 flex items-center gap-1 px-2.5 py-0.5 rounded-t text-[8px] bg-zinc-800/50 text-zinc-500 max-w-[90px] truncate">
             New Session
@@ -234,7 +234,7 @@ function SingleBrowser() {
             <path d="M5 4V3a3 3 0 016 0v1" stroke="currentColor" strokeWidth="1.5" />
           </svg>
           <span className="text-[8px] text-zinc-400 hba-type-url whitespace-nowrap overflow-hidden inline-block">
-            browsefleet.com/dashboard
+            localhost:3000/v1/sessions
           </span>
           <span className="text-[8px] text-zinc-400 hba-caret-url">|</span>
         </div>

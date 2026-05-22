@@ -1,0 +1,26 @@
+name: Content change
+description: Suggest a copy edit, docs addition, or new page.
+title: "docs: "
+labels: ["docs", "triage"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What should change?
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why?
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow this project's [Code of Conduct](https://github.com/theRJMurray/browsefleet-web/blob/master/CODE_OF_CONDUCT.md).
+          required: true

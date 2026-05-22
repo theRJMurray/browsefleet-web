@@ -1,70 +1,69 @@
 import Link from "next/link";
 import { HeroBrowserAnimation } from "@/components/hero-browser-animation";
+import { RepoCard, REPOS } from "@/components/repo-card";
 
 const FEATURES = [
   {
     title: "Sessions API",
-    description: "Launch managed browser sessions via API. Connect with Puppeteer, Playwright, or Selenium through CDP WebSocket.",
+    description:
+      "Launch managed browser sessions over REST. Connect with Puppeteer, Playwright, or Selenium through the CDP WebSocket proxy.",
   },
   {
-    title: "Stealth Mode",
-    description: "Built-in anti-detection with fingerprint spoofing, WebDriver masking, and timezone matching. Pass bot checks by default.",
+    title: "Stealth by default",
+    description:
+      "puppeteer-extra-plugin-stealth baked in plus per-session randomized viewport, user agent, and platform fingerprints.",
   },
   {
-    title: "Quick Actions",
-    description: "One-call scrape, screenshot, or PDF. Returns cleaned HTML, markdown, and readability-optimized text.",
+    title: "Quick actions",
+    description:
+      "One-call scrape, screenshot, or PDF. Returns cleaned HTML, markdown, readability text, and link metadata.",
   },
   {
     title: "Computer API",
-    description: "Click, type, scroll, navigate. Built for Claude, GPT, and Gemini Computer Use. Every action returns a screenshot.",
+    description:
+      "Click, type, scroll, navigate. Designed for Claude, GPT, and Gemini Computer Use. Every action returns a screenshot.",
   },
   {
-    title: "CAPTCHA Solving",
-    description: "Automatic CAPTCHA detection and solving via 2captcha integration. reCAPTCHA, hCaptcha, and Turnstile supported.",
+    title: "Operator mode",
+    description:
+      "Sessions can start in human control, let a real person log in, then hand off to an agent via the control state machine.",
   },
   {
-    title: "Proxy Support",
-    description: "Per-session proxy URLs with SOCKS5 and HTTP support. Built-in proxy authentication handling.",
+    title: "Profile persistence",
+    description:
+      "Persistent Chrome user-data directories. Logins, cookies, and storage survive across sessions.",
   },
   {
-    title: "Cookie Persistence",
-    description: "Save and restore browser profiles across sessions. Cookies, localStorage, and auth state persist automatically.",
+    title: "Built-in vision agent",
+    description:
+      "Take a natural-language task. The agent screenshots, reasons with Claude or GPT, picks an action, executes, repeats.",
   },
   {
-    title: "Self-Hostable",
-    description: "Run BrowseFleet on your own infrastructure. Single Docker container, no external dependencies.",
+    title: "Self-hosted, MIT-licensed",
+    description:
+      "One Node process, one SQLite file, one Docker container. Runs on a $4/mo Hetzner box. No external services.",
   },
-];
-
-const TIERS = [
-  { name: "Hobby", price: "Free", rate: "$0.10/hr", sessions: "5 concurrent", daily: "500 requests", highlight: false },
-  { name: "Starter", price: "$29", rate: "$0.10/hr", sessions: "10 concurrent", daily: "1,000 requests", highlight: false },
-  { name: "Developer", price: "$99", rate: "$0.08/hr", sessions: "20 concurrent", daily: "Unlimited", highlight: true },
-  { name: "Pro", price: "$499", rate: "$0.05/hr", sessions: "100 concurrent", daily: "Unlimited", highlight: false },
 ];
 
 const CODE_EXAMPLE = `import { BrowseFleet } from 'browsefleet';
 import puppeteer from 'puppeteer-core';
 
-const bf = new BrowseFleet({ apiKey: 'bf_...' });
-
-// Launch a stealth browser session
-const session = await bf.sessions.create({
-  stealth: 'full',
-  viewport: { width: 1920, height: 1080 },
+const bf = new BrowseFleet({
+  baseUrl: 'http://localhost:3000', // or your self-hosted URL
 });
 
-// Connect Puppeteer to the cloud browser
+// Quick action: scrape a page (no session bookkeeping)
+const { markdown } = await bf.scrape('https://example.com');
+
+// Persistent session: connect Puppeteer over the CDP proxy
+const session = await bf.sessions.create({ stealth: 'full' });
 const browser = await puppeteer.connect({
   browserWSEndpoint: session.websocketUrl,
 });
-
 const page = await browser.newPage();
 await page.goto('https://example.com');
 
-// Or use quick actions — no session needed
-const { markdown } = await bf.scrape('https://example.com');
-console.log(markdown);`;
+await bf.sessions.release(session.id);`;
 
 export default function HomePage() {
   return (
@@ -75,29 +74,40 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-sm font-semibold text-purple-400 uppercase tracking-widest mb-4">
-                Cloud Browser API
+                Open-source cloud browser API
               </p>
               <h1 className="text-5xl font-bold tracking-tight text-white leading-tight mb-6">
-                Headless browsers for
+                Self-hosted browsers for
                 <br />
                 AI agents and developers
               </h1>
               <p className="text-lg text-zinc-400 leading-relaxed mb-8 max-w-xl">
-                Launch managed browser sessions in the cloud. Connect with Puppeteer, Playwright, or Selenium.
-                Built-in stealth, CAPTCHA solving, and proxy rotation.
+                BrowseFleet runs a fleet of stealthed headless Chrome instances behind a single REST
+                API. Sessions, scrape, screenshot, PDF, profile persistence, human-in-the-loop
+                control. MIT licensed. You host it.
               </p>
-              <div className="flex items-center gap-4">
-                <Link
-                  href="/docs/quickstart"
-                  className="rounded-lg bg-purple-600 px-6 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
+              <div className="flex items-center gap-4 flex-wrap">
+                <a
+                  href="https://github.com/theRJMurray/browsefleet"
+                  className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-6 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
+                  aria-label="Star theRJMurray/browsefleet on GitHub"
                 >
-                  Get Started
+                  <svg viewBox="0 0 16 16" fill="currentColor" className="h-4 w-4" aria-hidden="true">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                  </svg>
+                  Star on GitHub
+                </a>
+                <Link
+                  href="/self-host"
+                  className="rounded-lg border border-zinc-700 px-6 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
+                >
+                  Run it locally
                 </Link>
                 <Link
                   href="/docs"
                   className="rounded-lg border border-zinc-700 px-6 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
                 >
-                  Read the Docs
+                  Read the docs
                 </Link>
               </div>
             </div>
@@ -113,24 +123,29 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6 py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div>
-              <p className="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">One-Line Integration</p>
-              <h2 className="text-3xl font-bold text-white mb-4">Connect your existing tools</h2>
+              <p className="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">
+                One integration, two patterns
+              </p>
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Use the SDK or connect Puppeteer directly
+              </h2>
               <p className="text-zinc-400 leading-relaxed mb-6">
-                BrowseFleet returns a standard CDP WebSocket URL. Connect any browser automation library
-                you already use. One line to switch from local to cloud.
+                Quick actions for one-shot scrape / screenshot / PDF. Sessions when you need a
+                persistent browser. The session response returns a CDP WebSocket URL, so any
+                automation library that speaks CDP plugs in unchanged.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <span className="shrink-0 mt-1 h-1.5 w-1.5 rounded-full bg-purple-400" />
-                  <p className="text-sm text-zinc-400">Sessions start in under 1 second</p>
+                  <p className="text-sm text-zinc-400">Sessions start in under a second on a warm host</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="shrink-0 mt-1 h-1.5 w-1.5 rounded-full bg-purple-400" />
-                  <p className="text-sm text-zinc-400">Run up to 100 concurrent browsers</p>
+                  <p className="text-sm text-zinc-400">Stealth defaults pass standard bot-detection fingerprint pages</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="shrink-0 mt-1 h-1.5 w-1.5 rounded-full bg-purple-400" />
-                  <p className="text-sm text-zinc-400">Stealth mode passes all bot detection</p>
+                  <p className="text-sm text-zinc-400">Cap the pool at any concurrency your host can sustain</p>
                 </div>
               </div>
             </div>
@@ -154,7 +169,7 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6 py-20">
           <div className="text-center mb-12">
             <p className="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">Features</p>
-            <h2 className="text-3xl font-bold text-white">Everything you need for browser automation</h2>
+            <h2 className="text-3xl font-bold text-white">Everything in one repo</h2>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {FEATURES.map((f) => (
@@ -167,60 +182,50 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="border-t border-zinc-800/50" id="pricing">
+      {/* Repos */}
+      <section className="border-t border-zinc-800/50">
         <div className="max-w-6xl mx-auto px-6 py-20">
           <div className="text-center mb-12">
-            <p className="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">Pricing</p>
-            <h2 className="text-3xl font-bold text-white">Simple, usage-based pricing</h2>
-            <p className="text-sm text-zinc-500 mt-3">Pay per browser-hour. No hidden fees. Self-host for free.</p>
+            <p className="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">
+              Four repos, all MIT
+            </p>
+            <h2 className="text-3xl font-bold text-white">Server, SDKs, and this site</h2>
+            <p className="text-sm text-zinc-500 mt-3 max-w-2xl mx-auto">
+              The full project lives in the open. Server, both SDKs, and the marketing site you are
+              reading are all public on GitHub.
+            </p>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {TIERS.map((tier) => (
-              <div
-                key={tier.name}
-                className={`rounded-xl border p-6 ${
-                  tier.highlight
-                    ? "border-purple-500/50 bg-purple-950/20"
-                    : "border-zinc-800 bg-zinc-900/30"
-                }`}
-              >
-                {tier.highlight && (
-                  <p className="text-[10px] font-semibold text-purple-400 uppercase tracking-widest mb-3">Most Popular</p>
-                )}
-                <p className="text-sm font-semibold text-white">{tier.name}</p>
-                <p className="text-3xl font-bold text-white mt-2">{tier.price}<span className="text-sm font-normal text-zinc-500">/mo</span></p>
-                <p className="text-xs text-purple-400 mt-1">{tier.rate} browser time</p>
-                <div className="mt-6 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <span className="h-1 w-1 rounded-full bg-zinc-600" />
-                    <p className="text-xs text-zinc-400">{tier.sessions}</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="h-1 w-1 rounded-full bg-zinc-600" />
-                    <p className="text-xs text-zinc-400">{tier.daily}</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="h-1 w-1 rounded-full bg-zinc-600" />
-                    <p className="text-xs text-zinc-400">Stealth mode</p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="h-1 w-1 rounded-full bg-zinc-600" />
-                    <p className="text-xs text-zinc-400">CDP WebSocket</p>
-                  </div>
-                </div>
-                <Link
-                  href="/dashboard"
-                  className={`block text-center mt-6 rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors ${
-                    tier.highlight
-                      ? "bg-purple-600 text-white hover:bg-purple-500"
-                      : "border border-zinc-700 text-zinc-300 hover:border-zinc-500 hover:text-white"
-                  }`}
-                >
-                  Get Started
-                </Link>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <RepoCard repo={REPOS.server} />
+            <RepoCard repo={REPOS.node} />
+            <RepoCard repo={REPOS.python} />
+            <RepoCard repo={REPOS.web} />
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing strip */}
+      <section className="border-t border-zinc-800/50" id="pricing">
+        <div className="max-w-6xl mx-auto px-6 py-20 text-center">
+          <p className="text-xs font-semibold text-purple-400 uppercase tracking-widest mb-3">Pricing</p>
+          <h2 className="text-3xl font-bold text-white">Free. You host it.</h2>
+          <p className="text-zinc-400 leading-relaxed mt-4 max-w-xl mx-auto mb-8">
+            BrowseFleet is MIT licensed. There is no hosted SaaS to subscribe to. You run the Docker
+            image on a $4-per-month VPS, or scale up; that is the entire cost model.
+          </p>
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <Link
+              href="/pricing"
+              className="rounded-lg bg-purple-600 px-6 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
+            >
+              Read the pricing page
+            </Link>
+            <Link
+              href="/self-host"
+              className="rounded-lg border border-zinc-700 px-6 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
+            >
+              Self-host recipes
+            </Link>
           </div>
         </div>
       </section>
@@ -228,15 +233,31 @@ export default function HomePage() {
       {/* CTA */}
       <section className="border-t border-zinc-800/50">
         <div className="max-w-6xl mx-auto px-6 py-20 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to automate the web?</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">Ready to run a fleet?</h2>
           <p className="text-zinc-400 mb-8 max-w-lg mx-auto">
-            Get started in under 2 minutes. Free tier includes 500 requests per day.
+            One docker command to a working local server. Five minutes to a deployed VPS.
           </p>
-          <div className="flex items-center justify-center gap-4">
-            <Link href="/dashboard" className="rounded-lg bg-purple-600 px-8 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors">
-              Start Free
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <a
+              href="https://github.com/theRJMurray/browsefleet"
+              className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-8 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
+              aria-label="Star theRJMurray/browsefleet on GitHub"
+            >
+              <svg viewBox="0 0 16 16" fill="currentColor" className="h-4 w-4" aria-hidden="true">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+              </svg>
+              Star on GitHub
+            </a>
+            <Link
+              href="/self-host"
+              className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
+            >
+              Self-host guide
             </Link>
-            <Link href="/docs" className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors">
+            <Link
+              href="/docs"
+              className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
+            >
               Documentation
             </Link>
           </div>

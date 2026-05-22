@@ -5,10 +5,12 @@ import Link from "next/link";
 
 const NAV_LINKS = [
   { href: "/docs", label: "Docs" },
+  { href: "/self-host", label: "Self-host" },
+  { href: "/sdks", label: "SDKs" },
+  { href: "/comparison", label: "Comparison" },
   { href: "/pricing", label: "Pricing" },
   { href: "/blog", label: "Blog" },
-  { href: "https://github.com/theRJMurray/browsefleet", label: "GitHub", external: true },
-  { href: "/dashboard", label: "Dashboard", cta: true },
+  { href: "https://github.com/theRJMurray/browsefleet", label: "Star on GitHub", external: true, cta: true },
 ];
 
 export function MobileNav() {
@@ -42,28 +44,19 @@ export function MobileNav() {
         <div className="absolute top-16 left-0 right-0 border-b border-zinc-800/50 bg-zinc-900">
           <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
             {NAV_LINKS.map((link) => {
+              const className = link.cta
+                ? "block px-3 py-2.5 text-sm font-semibold text-purple-400 hover:text-purple-300 transition-colors rounded-lg hover:bg-zinc-800/50"
+                : "block px-3 py-2.5 text-sm text-zinc-400 hover:text-white transition-colors rounded-lg hover:bg-zinc-800/50";
               if (link.external) {
                 return (
                   <a
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="block px-3 py-2.5 text-sm text-zinc-400 hover:text-white transition-colors rounded-lg hover:bg-zinc-800/50"
+                    className={className}
                   >
                     {link.label}
                   </a>
-                );
-              }
-              if (link.cta) {
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="block px-3 py-2.5 text-sm font-semibold text-purple-400 hover:text-purple-300 transition-colors rounded-lg hover:bg-zinc-800/50"
-                  >
-                    {link.label}
-                  </Link>
                 );
               }
               return (
@@ -71,7 +64,7 @@ export function MobileNav() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block px-3 py-2.5 text-sm text-zinc-400 hover:text-white transition-colors rounded-lg hover:bg-zinc-800/50"
+                  className={className}
                 >
                   {link.label}
                 </Link>

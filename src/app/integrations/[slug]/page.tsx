@@ -143,14 +143,20 @@ export default async function IntegrationPage({
             Try BrowseFleet with {int.name}
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg mx-auto">
-            Free tier includes 500 daily requests. Connect {int.name} in minutes.
+            BrowseFleet is open source and MIT licensed. Self-host the server, connect {int.name} in minutes.
           </p>
-          <div className="flex items-center justify-center gap-4">
-            <Link
-              href="/docs/quickstart"
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <a
+              href="https://github.com/theRJMurray/browsefleet"
               className="rounded-lg bg-purple-600 px-8 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
             >
-              Get Started
+              Star on GitHub
+            </a>
+            <Link
+              href="/self-host"
+              className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
+            >
+              Self-host guide
             </Link>
             <Link
               href="/docs"

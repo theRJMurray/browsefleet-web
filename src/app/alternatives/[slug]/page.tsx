@@ -168,21 +168,26 @@ export default async function AlternativePage({
             Ready to try BrowseFleet?
           </h2>
           <p className="text-zinc-400 mb-8 max-w-lg mx-auto">
-            Get started in under 2 minutes with a free tier. No credit card
-            required.
+            BrowseFleet is open source and MIT licensed. One docker command to a working server; you host it.
           </p>
-          <div className="flex items-center justify-center gap-4">
-            <Link
-              href="/docs/quickstart"
+          <div className="flex items-center justify-center gap-4 flex-wrap">
+            <a
+              href="https://github.com/theRJMurray/browsefleet"
               className="rounded-lg bg-purple-600 px-8 py-3 text-sm font-semibold text-white hover:bg-purple-500 transition-colors"
             >
-              Get Started
-            </Link>
+              Star on GitHub
+            </a>
             <Link
-              href="/pricing"
+              href="/self-host"
               className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
             >
-              View Pricing
+              Self-host guide
+            </Link>
+            <Link
+              href="/comparison"
+              className="rounded-lg border border-zinc-700 px-8 py-3 text-sm font-semibold text-zinc-300 hover:border-zinc-500 hover:text-white transition-colors"
+            >
+              Compare all
             </Link>
           </div>
         </div>
