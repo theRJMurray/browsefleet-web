@@ -1,12 +1,16 @@
+---
+title: BrowseFleet marketing site
+---
+
 # browsefleet-web
 
-The marketing site for [BrowseFleet](https://github.com/theRJMurray/browsefleet), live at [browsefleet.com](https://browsefleet.com).
+The marketing and documentation site for [BrowseFleet](https://github.com/theRJMurray/browsefleet), an open-source browser API for automation and AI agents.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D20-43853d.svg)](./.nvmrc)
 [![Built with Next.js](https://img.shields.io/badge/built%20with-next.js-000000.svg)](https://nextjs.org)
 
-Next.js 15 (App Router) + Tailwind, static-exported, deployed to Vercel. Open source so contributors can fix copy and docs via PR, and so anyone curious about the project can read the site that pitches them on it.
+Next.js 15 (App Router) + Tailwind, configured for static export and Vercel deployment. Open source so contributors can fix copy and docs via PR, and so anyone curious about the project can read the site that pitches them on it. This repository is the website source; running it does not start a BrowseFleet API server.
 
 > **Working in this repo with an AI agent?** Read [`skill.md`](./skill.md) first. It teaches Claude Code, Cursor, Aider, or any coding agent how to set up, build, and contribute to this site with no further instruction.
 
